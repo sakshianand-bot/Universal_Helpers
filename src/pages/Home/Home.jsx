@@ -22,9 +22,66 @@ import {
   BadgeCheck,
   ShieldCheck,
   BookOpen,
-  PhoneCall
+  PhoneCall,
+  Radio,
+  Truck,
+  Car,
+  Smartphone,
+  Lock,
+  Building,
+  CreditCard,
+  FileCheck,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react'
 import ChatWidget from '../../components/Chat/ChatWidget'
+
+// Counter Component
+const Counter = ({ end, suffix }) => {
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    let start = 0;
+    const duration = 2000;
+    const increment = end / (duration / 16);
+    
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= end) {
+        setCount(end);
+        clearInterval(timer);
+      } else {
+        setCount(Math.ceil(start));
+      }
+    }, 16);
+    
+    return () => clearInterval(timer);
+  }, [end]);
+  
+  return <span>{count}{suffix}</span>;
+};
+
+// FAQ Item Component
+const FAQItem = ({ question, answer }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="bg-black/50 backdrop-blur-sm rounded-xl border border-red-600/20 overflow-hidden">
+      <button
+        className="w-full px-6 py-4 text-left flex items-center justify-between text-white font-semibold hover:bg-red-600/10 transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{question}</span>
+        <ChevronDown className={`h-5 w-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <div className="px-6 py-4 bg-red-600/5 border-t border-red-600/10">
+          <p className="text-red-100">{answer}</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Home = () => {
   const [visibleSections, setVisibleSections] = useState({})
@@ -52,157 +109,132 @@ const Home = () => {
     return () => observer.disconnect()
   }, [])
 
+  // Updated Services for Have Dominion
   const services = [
     {
-      image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Healthcare Services",
-      description: "Professional medical care, home visits, and health consultations with certified healthcare providers.",
-      features: ["Doctor Home Visits", "Telemedicine", "Medical Checkups", "Emergency Care"],
-      color: "from-red-500 to-pink-500",
-      bgColor: "bg-gradient-to-br from-red-500/20 to-pink-500/20"
+      icon: <Car className="h-8 w-8" />,
+      title: "Auto Customization & Audio",
+      description: "Premium car audio systems, truck customization, and professional vehicle upgrades for enthusiasts.",
+      features: ["Premium Audio Installation", "Truck Customization", "Performance Upgrades", "Professional Tuning"],
+      color: "from-red-600 to-red-800",
+      bgColor: "bg-gradient-to-br from-red-600/20 to-red-800/20",
+      category: "automotive",
+      cta: "Customize Your Vehicle"
     },
     {
-      image: "https://images.unsplash.com/photo-1593078166039-c9878df5c520?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      title: "Radio & Electronics Repair",
-      description: "Expert repair services for radios, audio equipment, and vintage electronics with warranty.",
-      features: ["Radio Repair", "Audio Equipment", "Vintage Electronics", "Quick Service"],
-      color: "from-blue-500 to-cyan-500",
-      bgColor: "bg-gradient-to-br from-blue-500/20 to-cyan-500/20"
+      icon: <Truck className="h-8 w-8" />,
+      title: "Class A CDL Training",
+      description: "Commercial Driver's License training and certification for professional truck driving careers.",
+      features: ["CDL Certification", "Road Training", "Job Placement", "Lifetime Support"],
+      color: "from-red-700 to-red-900",
+      bgColor: "bg-gradient-to-br from-red-700/20 to-red-900/20",
+      category: "cdl",
+      cta: "Start CDL Training"
     },
     {
-      image: "https://images.unsplash.com/photo-1584697964358-3e14ca57658b?w=400&h=300&fit=crop",
-      title: "Home Tuition",
-      description: "Personalized academic tutoring and skill development sessions at your convenience.",
-      features: ["Academic Subjects", "Test Preparation", "Skill Development", "Flexible Timing"],
-      color: "from-green-500 to-emerald-500",
-      bgColor: "bg-gradient-to-br from-green-500/20 to-emerald-500/20"
+      icon: <Radio className="h-8 w-8" />,
+      title: "HAM Radio & Communications",
+      description: "HAM radio licensing, equipment setup, and secure communication systems for enthusiasts.",
+      features: ["HAM Licensing", "Equipment Setup", "Secure Comms", "Emergency Protocols"],
+      color: "from-red-500 to-red-700",
+      bgColor: "bg-gradient-to-br from-red-500/20 to-red-700/20",
+      category: "radio",
+      cta: "Get Licensed"
+    },
+    {
+      icon: <GraduationCap className="h-8 w-8" />,
+      title: "Home Schooling Programs",
+      description: "Comprehensive home schooling solutions with customized curriculum and expert guidance.",
+      features: ["Custom Curriculum", "Expert Tutors", "Progress Tracking", "College Prep"],
+      color: "from-amber-600 to-amber-800",
+      bgColor: "bg-gradient-to-br from-amber-600/20 to-amber-800/20",
+      category: "education",
+      cta: "Explore Programs"
+    },
+    {
+      icon: <FileCheck className="h-8 w-8" />,
+      title: "Home Healthcare Licensing",
+      description: "Complete licensing solutions for home healthcare providers and medical professionals.",
+      features: ["License Preparation", "Compliance Guidance", "Document Management", "Renewal Support"],
+      color: "from-amber-500 to-amber-700",
+      bgColor: "bg-gradient-to-br from-amber-500/20 to-amber-700/20",
+      category: "healthcare",
+      cta: "Get Licensed"
+    },
+    {
+      icon: <CreditCard className="h-8 w-8" />,
+      title: "Financial Services & GRC",
+      description: "Authorized user accounts, financial planning, and Governance, Risk & Compliance solutions.",
+      features: ["Credit Building", "GRC Consulting", "Financial Planning", "Compliance Management"],
+      color: "from-amber-600 to-amber-800",
+      bgColor: "bg-gradient-to-br from-amber-600/20 to-amber-800/20",
+      category: "financial",
+      cta: "Secure Your Future"
+    },
+    {
+      icon: <Smartphone className="h-8 w-8" />,
+      title: "Software & App Development",
+      description: "Custom software solutions, mobile apps, and F-Droid/Aurora Store compatible applications.",
+      features: ["Custom Development", "F-Droid Compatible", "Security Focused", "Ongoing Support"],
+      color: "from-amber-500 to-amber-700",
+      bgColor: "bg-gradient-to-br from-amber-500/20 to-amber-700/20",
+      category: "software",
+      cta: "Start Your Project"
+    },
+    {
+      icon: <Building className="h-8 w-8" />,
+      title: "Creditor Academy",
+      description: "Premium training program for financial mastery and private sector career advancement.",
+      features: ["Basic Training", "Premium Modules", "Career Placement", "Ongoing Mentorship"],
+      color: "from-yellow-600 to-yellow-800",
+      bgColor: "bg-gradient-to-br from-yellow-600/20 to-yellow-800/20",
+      category: "academy",
+      cta: "Enroll Now"
     }
   ]
 
-  const stats = [
-    { number: "5K+", label: "Happy Customers" },
-    { number: "50+", label: "Expert Professionals" },
-    { number: "24/7", label: "Service Available" },
-    { number: "98%", label: "Satisfaction Rate" }
-  ]
+  // const stats = [
+  //   { number: "2K+", label: "Private Sector Graduates", icon: <GraduationCap className="h-6 w-6" /> },
+  //   { number: "500+", label: "CDL Certified Drivers", icon: <Truck className="h-6 w-6" /> },
+  //   { number: "24/7", label: "Compliance Support", icon: <Shield className="h-6 w-6" /> },
+  //   { number: "95%", label: "Success Rate", icon: <Award className="h-6 w-6" /> }
+  // ]
 
-  const bookingSteps = [
+  const documentFeatures = [
     {
-      step: "01",
-      title: "Book Service",
-      description: "Choose your service and schedule appointment online or by phone"
+      icon: <FileText className="h-8 w-8" />,
+      title: "Smart Document Storage",
+      description: "Organized, secure storage for all your important documents with instant access"
     },
     {
-      step: "02",
-      title: "Expert Visit",
-      description: "Our certified professional visits your location at scheduled time"
+      icon: <ShieldCheck className="h-8 w-8" />,
+      title: "Compliance Tracking",
+      description: "Never fall out of compliance with automated alerts and renewal reminders"
     },
     {
-      step: "03",
-      title: "Quality Service",
-      description: "Receive professional service with guaranteed satisfaction"
+      icon: <Smartphone className="h-8 w-8" />,
+      title: "Mobile App Companion",
+      description: "F-Droid & Aurora Store compatible app for document management on the go"
     },
     {
-      step: "04",
-      title: "Support",
-      description: "24/7 customer support and service warranty included"
+      icon: <Lock className="h-8 w-8" />,
+      title: "Secure & Private",
+      description: "Military-grade encryption ensuring your documents remain confidential"
     }
   ]
 
-  // New Sections Data
-  const testimonials = [
+  const creditorAcademy = [
     {
-      id: 1,
-      name: "Sarah Johnson",
-      service: "Healthcare",
-      rating: 5,
-      text: "The doctor arrived within 30 minutes when my father had an emergency. Professional and caring service!",
-      avatar: "https://images.unsplash.com/photo-1755519024827-fd05075a7200?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      level: "Basic Training",
+      description: "Essential knowledge for working in the private sector",
+      features: ["Financial Fundamentals", "Legal Framework", "Privacy Protocols", "Basic Compliance"],
+      color: "from-gray-600 to-gray-800"
     },
     {
-      id: 2,
-      name: "Mike Chen",
-      service: "Radio Repair",
-      rating: 5,
-      text: "Fixed my vintage radio that no one else could repair. Excellent work and reasonable pricing!",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
-    },
-    {
-      id: 3,
-      name: "Priya Patel",
-      service: "Home Tuition",
-      rating: 5,
-      text: "My daughter's math grades improved from C to A in just 2 months. The tutor was amazing!",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
-    }
-  ]
-
-  const teamMembers = [
-    {
-      name: "Dr. Robert Davis",
-      role: "Senior Healthcare Provider",
-      experience: "15+ years",
-      specialty: "Emergency Medicine",
-      image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face"
-    },
-    {
-      name: "Lisa Wong",
-      role: "Electronics Specialist",
-      experience: "12+ years",
-      specialty: "Vintage Electronics",
-      image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=200&h=200&fit=crop&crop=face"
-    },
-    {
-      name: "David Miller",
-      role: "Head Tutor",
-      experience: "10+ years",
-      specialty: "STEM Subjects",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
-    }
-  ]
-
-  const serviceAreas = [
-    "Downtown District", "Northside", "South Park", "Eastwood", "West Hills", 
-    "Riverside", "Mountain View", "Lakefront", "City Center", "Suburban Areas"
-  ]
-
-  const faqs = [
-    {
-      question: "How quickly can you respond to emergency healthcare calls?",
-      answer: "We guarantee response within 30 minutes for emergency healthcare services in our service area."
-    },
-    {
-      question: "Do you offer warranty on radio repairs?",
-      answer: "Yes, all our repair services come with a 90-day warranty on parts and labor."
-    },
-    {
-      question: "What subjects do you cover in home tuition?",
-      answer: "We cover all major academic subjects from K-12, plus test preparation and college-level courses."
-    },
-    {
-      question: "Are your service providers certified and background checked?",
-      answer: "Absolutely! All our professionals are certified, licensed, and undergo thorough background checks."
-    }
-  ]
-
-  const pricing = [
-    {
-      service: "Healthcare Consultation",
-      price: "$99",
-      duration: "per visit",
-      features: ["Doctor Home Visit", "Basic Checkup", "Prescription", "Follow-up Call"]
-    },
-    {
-      service: "Radio Repair",
-      price: "$49",
-      duration: "starting from",
-      features: ["Diagnosis", "Basic Repairs", "90-day Warranty", "Parts Included"]
-    },
-    {
-      service: "Home Tuition",
-      price: "$35",
-      duration: "per hour",
-      features: ["Certified Tutor", "Customized Lessons", "Progress Reports", "Flexible Scheduling"]
+      level: "Premium Program",
+      description: "Advanced training for financial mastery and leadership",
+      features: ["Advanced Strategies", "Leadership Development", "Wealth Management", "Executive Placement"],
+      color: "from-yellow-600 to-yellow-800"
     }
   ]
 
@@ -211,229 +243,333 @@ const Home = () => {
       {/* Custom styles */}
       <style jsx global>{`
         @keyframes float {
-          0%, 100% { 
-            transform: translateY(0px) translateX(0px) rotate(0deg) scale(1); 
-          }
-          33% { 
-            transform: translateY(-20px) translateX(10px) rotate(120deg) scale(1.1); 
-          }
-          66% { 
-            transform: translateY(10px) translateX(-10px) rotate(240deg) scale(0.9); 
-          }
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
         }
         @keyframes gradient {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
           100% { background-position: 0% 50%; }
         }
-        @keyframes glow {
-          0%, 100% { 
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
-          }
-          50% { 
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.8), 0 0 60px rgba(168, 85, 247, 0.3);
-          }
+        @keyframes crimson-glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.5); }
+          50% { box-shadow: 0 0 40px rgba(220, 38, 38, 0.8), 0 0 60px rgba(220, 38, 38, 0.3); }
         }
-        @keyframes subtle-bounce {
-          0%, 100% { 
-            transform: translateY(0px); 
-          }
-          50% { 
-            transform: translateY(-10px); 
-          }
-        }
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes icon-pulse {
-          0%, 100% { 
-            transform: scale(1);
-            opacity: 1;
-          }
-          50% { 
-            transform: scale(1.1);
-            opacity: 0.9;
-          }
-        }
-        .animate-float {
-          animation: float 8s ease-in-out infinite;
-        }
-        .animate-float-delay {
-          animation: float 10s ease-in-out infinite;
-          animation-delay: 2s;
-        }
-        .animate-float-slow {
-          animation: float 15s ease-in-out infinite;
-        }
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
-        }
-        .animate-subtle-bounce {
-          animation: subtle-bounce 3s ease-in-out infinite;
-        }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-        .animate-icon-pulse {
-          animation: icon-pulse 3s ease-in-out infinite;
-        }
-        .animation-delay-1000 {
-          animation-delay: 1s;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-3000 {
-          animation-delay: 3s;
-        }
-        .text-shadow-lg {
-          text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
-        .backdrop-blur-glass {
-          backdrop-filter: blur(10px);
-          background: rgba(255, 255, 255, 0.1);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .backdrop-blur-dark {
-          backdrop-filter: blur(10px);
-          background: rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .semi-circle {
-          border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-        }
-        .icon-container {
-          filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
-        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-gradient { background-size: 200% 200%; animation: gradient 4s ease infinite; }
+        .animate-crimson-glow { animation: crimson-glow 3s ease-in-out infinite; }
+        .crimson-gradient { background: linear-gradient(135deg, #dc2626, #991b1b, #450a0a); }
+        .gold-gradient { background: linear-gradient(135deg, #d97706, #b45309, #78350f); }
       `}</style>
 
-      
-      
       {/* Emergency Banner */}
-<section 
-  id="emergency"
-  ref={(el) => (sectionRefs.current.emergency = el)}
-  className="relative bg-gradient-to-r from-red-400 via-red-500 to-pink-500 text-white py-2"
->
-  <div className="container mx-auto px-4 text-center">
-    <div className="flex flex-col md:flex-row items-center justify-center space-y-1 md:space-y-0 md:space-x-4">
-      <div className="flex items-center space-x-2">
-        <Zap className="h-3 w-3 animate-pulse" />
-        <span className="font-bold text-sm">24/7 Emergency Services Available</span>
-      </div>
-      <div className="flex items-center space-x-2">
-        <a href="tel:5551234567" className="bg-white text-red-500 font-medium py-1 px-3 rounded-full hover:bg-red-50 transition-all duration-300 flex items-center space-x-1 text-xs">
-          <PhoneCall className="h-3 w-3" />
-          <span>Call Now: (555) 123-4567</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+      <section id="emergency" className="relative crimson-gradient text-white py-3">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-6">
+            <div className="flex items-center space-x-2">
+              <Zap className="h-4 w-4 animate-pulse" />
+              <span className="font-bold">24/7 Compliance & Support Services</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <a href="tel:1-888-997-3744" className="bg-black text-red-400 font-semibold py-2 px-4 rounded-full hover:bg-gray-900 transition-all duration-300 flex items-center space-x-2">
+                <PhoneCall className="h-4 w-4" />
+                <span>Call Now: 1-888-997-3744</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-{/* Hero Section */}
-<section 
-  id="hero"
-  ref={(el) => (sectionRefs.current.hero = el)}
-  className="relative bg-gradient-to-br from-purple-900 via-black to-white text-white py-16 lg:py-24 overflow-hidden"
->
-  <div className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/80 to-white/10"></div>
-  <div className="container mx-auto px-4 relative z-10">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <div className="space-y-6">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-          Your Local
-          <span className="block bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent animate-gradient">
-            Service Partner
-          </span>
-        </h1>
-        <p className="text-xl text-purple-100 leading-relaxed">
-          Professional healthcare, electronics repair, and home tuition services at your doorstep. 
-          Serving our community with trust and excellence since 2010.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link 
-            to="/book" 
-            className="bg-gradient-to-r from-white to-purple-100 text-purple-900 font-semibold py-3 px-6 rounded-xl shadow-2xl flex items-center justify-center space-x-2 group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-0.5"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10 flex items-center space-x-2 transition-transform duration-300 group-hover:translate-x-1">
-              <Calendar className="h-5 w-5" />
-              <span>Book Service</span>
-            </div>
-          </Link>
-          <button className="border-2 border-white/80 text-white font-medium py-3 px-6 rounded-xl flex items-center justify-center space-x-2 backdrop-blur-glass transition-all duration-300 hover:scale-105 hover:bg-white/10 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="relative z-10 flex items-center space-x-2 transition-transform duration-300 group-hover:translate-x-1">
-              <Phone className="h-5 w-5" />
-              <span>Call Now</span>
-            </div>
-          </button>
-        </div>
-        <div className="flex items-center space-x-4 text-sm text-purple-200">
-          <div className="flex items-center space-x-1">
-            <MapPin className="h-4 w-4" />
-            <span>Serving Local Community</span>
+      {/* Hero Section */}
+      <section id="hero" className="relative bg-black text-white pt-12 lg:pt-16 pb-20 lg:pb-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-red-900/5 via-transparent to-transparent"></div>
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_var(--tw-gradient-stops))] from-yellow-600/5 via-transparent to-transparent"></div>
           </div>
-          <div className="flex items-center space-x-1">
-            <Clock className="h-4 w-4" />
-            <span>24/7 Emergency Services</span>
-          </div>
+          <div className="absolute top-10 left-10 w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
+          <div className="absolute top-20 right-20 w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-20 left-20 w-1.5 h-1.5 bg-yellow-500 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-2 h-2 bg-red-600 rounded-full animate-pulse"></div>
         </div>
-      </div>
-      <div className="relative">
-        <div className="backdrop-blur-glass rounded-3xl p-8 transition-all duration-500 hover:scale-105 hover:rotate-1">
-          <div className="overflow-hidden rounded-2xl w-full h-64 bg-gradient-to-br from-purple-700/90 to-black/90 relative shadow-2xl shadow-purple-500/50">
-            <img 
-              src="https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d?q=80&w=1196&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-              alt="Community Services" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 filter brightness-90"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-purple-900/30 to-transparent"></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-white text-center">
-                <div className="text-2xl font-bold mb-2 drop-shadow-lg">5K+ Happy Customers</div>
-                <div className="text-sm opacity-90 drop-shadow-md">Trusted Local Services</div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                Have
+                <span className="block bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 bg-clip-text text-transparent animate-gradient">
+                  Dominion
+                </span>
+              </h1>
+              <p className="text-xl text-red-100 leading-relaxed">
+                Your pathway to privacy, financial independence, and professional mastery. 
+                Join our global conglomerate and build the life you deserve.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link 
+                  to="/creditor-academy" 
+                  className="relative overflow-hidden group bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg flex items-center justify-center space-x-2 transition-all duration-300 hover:scale-105 hover:shadow-red-600/30"
+                >
+                  <GraduationCap className="h-5 w-5" />
+                  <span>Start at Creditor Academy</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+                </Link>
+                <button className="relative overflow-hidden group border-2 border-red-600/80 text-red-400 font-medium py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 hover:bg-red-600/10 flex items-center justify-center space-x-2">
+                  <Phone className="h-5 w-5" />
+                  <span>Call 1-888-997-3744</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                </button>
+              </div>
+              <div className="flex items-center space-x-6 text-sm text-red-200">
+                <div className="flex items-center space-x-2">
+                  <ShieldCheck className="h-4 w-4" />
+                  <span>Privacy Focused</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Award className="h-4 w-4" />
+                  <span>Professional Training</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Lock className="h-4 w-4" />
+                  <span>Secure Services</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="backdrop-blur-sm rounded-3xl p-8 border border-red-600/30">
+                <div className="overflow-hidden rounded-2xl w-full h-80 bg-gradient-to-br from-red-900/90 to-black/90 relative shadow-2xl shadow-red-500/20">
+                  <img 
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                    alt="Building a secure future" 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-red-900/20 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <div className="text-white text-left">
+                      <div className="text-2xl font-bold mb-2">Build Your Private Future</div>
+                      <div className="text-sm opacity-90">From CDL Training to Financial Mastery</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white p-4 rounded-2xl shadow-2xl shadow-purple-500/70 animate-glow">
-            <div className="flex items-center space-x-2">
-              <Users className="h-5 w-5" />
-              <span className="font-semibold">5K+ Customers</span>
+        </div>
+      </section>
+
+      {/* Live Stats Counter - Commented Out
+      <section className="py-20 bg-gradient-to-r from-red-950/50 to-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { end: 2000, label: "Lives Transformed", suffix: "+" },
+              { end: 500, label: "CDL Graduates", suffix: "+" },
+              { end: 95, label: "Success Rate", suffix: "%" },
+              { end: 24, label: "Support Hours", suffix: "/7" }
+            ].map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-white mb-3">
+                  <Counter end={stat.end} suffix={stat.suffix} />
+                </div>
+                <div className="text-red-200 font-medium">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      */}
+
+      {/* Service Sections */}
+      <div className="py-16 bg-gradient-to-b from-black to-gray-900">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent">
+            Our Core Services
+          </h2>
+          
+          {/* Auto Customization & Audio Section */}
+          <div id="auto-customization" className="mb-20 bg-gradient-to-br from-red-900/20 to-black rounded-2xl overflow-hidden border border-red-900/30 shadow-2xl hover:shadow-red-900/20 transition-all duration-300">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="p-8 md:p-12">
+                <div className="flex items-center mb-6">
+                  <Car className="h-10 w-10 text-red-500 mr-3" />
+                  <h3 className="text-3xl font-bold text-white">Auto Customization & Audio</h3>
+                </div>
+                <p className="text-gray-300 mb-6 text-lg">Transform your vehicle with our premium customization and audio solutions. From high-end sound systems to performance upgrades, we bring your automotive dreams to life.</p>
+                <ul className="space-y-3 mb-8">
+                  {['Premium Audio Installation', 'Truck Customization', 'Performance Upgrades', 'Professional Tuning'].map((feature, index) => (
+                    <li key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button className="bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center group">
+                  Customize Your Vehicle
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+              <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" 
+                  alt="Professional auto customization and audio installation" 
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent md:from-transparent md:to-black/40"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center md:text-right">
+                  <div className="inline-flex items-center px-4 py-2 bg-red-600/90 rounded-full text-sm font-semibold mb-2">
+                    <Car className="h-4 w-4 mr-2" />
+                    <span>Custom Builds</span>
+                  </div>
+                  <h4 className="text-xl font-bold">Premium Audio</h4>
+                  <p className="text-sm opacity-90">Transform your ride with our experts</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Class A CDL Training Section */}
+          <div id="cdl-training" className="mb-20 bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden border border-gray-800 shadow-2xl hover:shadow-red-900/10 transition-all duration-300">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="p-8 md:p-12 order-2 md:order-1">
+                <div className="flex items-center mb-6">
+                  <Truck className="h-10 w-10 text-red-500 mr-3" />
+                  <h3 className="text-3xl font-bold text-white">Class A CDL Training</h3>
+                </div>
+                <p className="text-gray-300 mb-6 text-lg">Start your career in trucking with our comprehensive CDL training program. Our expert instructors and hands-on approach ensure you're road-ready in no time.</p>
+                <ul className="space-y-3 mb-8">
+                  {['CDL Certification', 'Road Training', 'Job Placement', 'Lifetime Support'].map((feature, index) => (
+                    <li key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button className="bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center group">
+                  Start CDL Training
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+              <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden order-1 md:order-2">
+                <img 
+                  src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.1.0&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" 
+                  alt="Professional truck driver with Class A CDL truck" 
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent md:from-transparent md:to-black/40"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center md:text-left">
+                  <div className="inline-flex items-center px-4 py-2 bg-red-600/90 rounded-full text-sm font-semibold mb-2">
+                    <Truck className="h-4 w-4 mr-2" />
+                    <span>Class A CDL Program</span>
+                  </div>
+                  <h4 className="text-xl font-bold">Earn While You Learn</h4>
+                  <p className="text-sm opacity-90">Paid on-the-job training available</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* HAM Radio & Communications Section */}
+          <div id="ham-radio" className="bg-gradient-to-br from-red-800/10 to-black rounded-2xl overflow-hidden border border-red-900/30 shadow-2xl hover:shadow-red-900/20 transition-all duration-300">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="p-8 md:p-12">
+                <div className="flex items-center mb-6">
+                  <Radio className="h-10 w-10 text-red-500 mr-3" />
+                  <h3 className="text-3xl font-bold text-white">HAM Radio & Communications</h3>
+                </div>
+                <p className="text-gray-300 mb-6 text-lg">Join the world of amateur radio with our comprehensive training and equipment solutions. Stay connected with secure, reliable communication systems.</p>
+                <ul className="space-y-3 mb-8">
+                  {['HAM Licensing', 'Equipment Setup', 'Secure Comms', 'Emergency Protocols'].map((feature, index) => (
+                    <li key={index} className="flex items-center text-gray-300">
+                      <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button className="bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center group">
+                  Get Licensed
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+              <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1604999565976-8913ad2ddb7c?ixlib=rb-4.1.0&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" 
+                  alt="Professional HAM radio equipment and communication setup" 
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent md:from-transparent md:to-black/40"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center md:text-right">
+                  <div className="inline-flex items-center px-4 py-2 bg-red-600/90 rounded-full text-sm font-semibold mb-2">
+                    <Radio className="h-4 w-4 mr-2" />
+                    <span>HAM Radio Training</span>
+                  </div>
+                  <h4 className="text-xl font-bold">Global Communication</h4>
+                  <p className="text-sm opacity-90">Connect worldwide with our expert training</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-
-
-      {/* Stats Section */}
-      <section 
-        id="stats"
-        ref={(el) => (sectionRefs.current.stats = el)}
-        className="bg-gradient-to-r from-gray-900 via-black to-blue-900 py-12 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="text-center transition-all duration-500 hover:scale-110 hover:-translate-y-2"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2 animate-gradient">
-                  {stat.number}
+      {/* Process Flow Section */}
+      <section className="py-20 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold gold-gradient bg-clip-text text-transparent mb-6">
+              Your Journey to Dominion
+            </h2>
+            <p className="text-xl text-amber-100 max-w-3xl mx-auto">
+              Simple steps to transform your life and career
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            <div className="hidden md:block absolute top-12 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-red-600 to-yellow-500"></div>
+            
+            {[
+              {
+                step: "01",
+                title: "Assess & Plan",
+                description: "Free consultation to understand your goals",
+                icon: <Users className="h-8 w-8" />
+              },
+              {
+                step: "02",
+                title: "Train & Learn",
+                description: "Professional training in your chosen field",
+                icon: <GraduationCap className="h-8 w-8" />
+              },
+              {
+                step: "03",
+                title: "Implement & Grow",
+                description: "Apply knowledge with our support",
+                icon: <Zap className="h-8 w-8" />
+              },
+              {
+                step: "04",
+                title: "Achieve Dominion",
+                description: "Financial freedom and career success",
+                icon: <Award className="h-8 w-8" />
+              }
+            ].map((step, index) => (
+              <div key={index} className="text-center group">
+                <div className="relative inline-flex items-center justify-center mb-6">
+                  <div className="absolute inset-0 bg-red-600 rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  <div className="relative bg-black border-2 border-red-600 rounded-full w-20 h-20 flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                    <div className="text-red-400 group-hover:text-yellow-400 transition-colors">
+                      {step.icon}
+                    </div>
+                  </div>
+                  <div className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">
+                    {step.step}
+                  </div>
                 </div>
-                <div className="text-gray-300 font-medium">{stat.label}</div>
+                <h3 className="text-xl font-semibold text-white mb-3">{step.title}</h3>
+                <p className="text-red-100 text-sm">{step.description}</p>
               </div>
             ))}
           </div>
@@ -441,241 +577,48 @@ const Home = () => {
       </section>
 
       {/* Services Section */}
-      <section 
-        id="services"
-        ref={(el) => (sectionRefs.current.services = el)}
-        className="bg-gradient-to-b from-gray-900 via-black to-blue-900 py-16 lg:py-24 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mb-4 animate-gradient">
+      <section id="services" className="py-20 lg:py-28 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold crimson-gradient bg-clip-text text-transparent animate-gradient mb-6">
               Our Services
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Professional, reliable, and affordable services for all your needs. 
-              We bring expertise right to your doorstep.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                className="transition-all duration-500 hover:scale-105 hover:-translate-y-4"
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <div className="group relative overflow-hidden bg-gray-800/70 backdrop-blur-sm rounded-2xl border border-blue-500/20 shadow-lg hover:shadow-2xl transition-all duration-500 h-full">
-                  {/* Image Section - Replaced Icons with Images */}
-                  <div className="relative h-48 overflow-hidden">
-                    <img 
-                      src={service.image} 
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-all duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-xl font-semibold text-white mb-2">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Service Content */}
-                  <div className="p-6 space-y-4">
-                    <p className="text-gray-300 leading-relaxed text-sm">
-                      {service.description}
-                    </p>
-                    
-                    <div className="space-y-2">
-                      {service.features.map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-center space-x-2 text-sm text-gray-400">
-                          <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
-                          <span className="flex-1">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    <button className="w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold py-3 rounded-xl mt-4 relative overflow-hidden group transition-all duration-300 hover:scale-105 hover:-translate-y-0.5">
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <span className="relative flex items-center justify-center space-x-2 transition-transform duration-300 group-hover:translate-x-1">
-                        <span>Book Now</span>
-                        <ArrowRight className="h-4 w-4" />
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section
-        id="process"
-        ref={(el) => (sectionRefs.current.process = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              How It Works
-            </h2>
-            <p className="text-xl text-gray-300">
-              Simple 4-step process to get the service you need
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Comprehensive solutions for automotive, education, licensing, and financial services. 
+              Your privacy and success are our priority.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {bookingSteps.map((step, index) => (
-              <div
-                key={index}
-                className="text-center group transition-all duration-500 hover:scale-110 hover:-translate-y-2"
-              >
-                <div className="relative bg-gray-800/80 backdrop-blur-sm rounded-2xl p-6 border border-blue-500/20 shadow-lg hover:shadow-2xl transition-all duration-500">
-                  <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto transition-all duration-300 group-hover:scale-110 group-hover:rotate-12 animate-glow">
-                    {step.step}
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-3 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-blue-300 group-hover:to-purple-300 group-hover:bg-clip-text group-hover:text-transparent">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <div key={index} className={`rounded-2xl p-6 border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 h-full flex flex-col ${
+                service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
+                  ? 'border-red-600/30 bg-gradient-to-br from-red-950/30 to-black/80 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/20' 
+                  : 'border-amber-600/30 bg-gradient-to-br from-amber-950/20 to-black/80 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/20'
+              }`}>
+                <div className={`inline-flex p-3 rounded-xl mb-4 ${
+                  service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
+                    ? 'bg-red-600/20 text-red-400' 
+                    : 'bg-amber-600/20 text-amber-400'
+                }`}>
+                  {service.icon}
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* NEW: Testimonials Section */}
-      <section
-        id="testimonials"
-        ref={(el) => (sectionRefs.current.testimonials = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              What Our Customers Say
-            </h2>
-            <p className="text-xl text-gray-300">
-              Don't just take our word for it - hear from our satisfied customers
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={testimonial.id}
-                className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-purple-500/20 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-white">{testimonial.name}</h4>
-                    <div className="flex items-center space-x-1">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      ))}
-                    </div>
-                    <span className="text-sm text-purple-300">{testimonial.service}</span>
-                  </div>
-                </div>
-                <p className="text-gray-300 italic">"{testimonial.text}"</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* NEW: Service Areas Section */}
-      {/*<section
-        id="areas"
-        ref={(el) => (sectionRefs.current.areas = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              Service Areas
-            </h2>
-            <p className="text-xl text-gray-300">
-              We proudly serve these local communities
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-8 border border-blue-500/20">
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {serviceAreas.map((area, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-300"
-                  >
-                    <MapPin className="h-4 w-4 text-blue-400 flex-shrink-0" />
-                    <span>{area}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8 p-4 bg-blue-500/10 rounded-xl border border-blue-500/30">
-                <div className="flex items-center justify-center space-x-2 text-blue-300">
-                  <Map className="h-5 w-5" />
-                  <span className="font-semibold">Covering 20+ mile radius from city center</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>*/}
-
-      {/* NEW: Pricing Section */}
-      <section
-        id="pricing"
-        ref={(el) => (sectionRefs.current.pricing = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 via-blue-400 to-green-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              Transparent Pricing
-            </h2>
-            <p className="text-xl text-gray-300">
-              No hidden fees - know exactly what you're paying for
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {pricing.map((plan, index) => (
-              <div
-                key={index}
-                className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-green-500/20 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 group"
-              >
-                <div className="text-center mb-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{plan.service}</h3>
-                  <div className="flex items-baseline justify-center space-x-1">
-                    <span className="text-3xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-                      {plan.price}
-                    </span>
-                    <span className="text-gray-400">{plan.duration}</span>
-                  </div>
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  {plan.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center space-x-2">
-                      <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
-                      <span className="text-gray-300 text-sm">{feature}</span>
+                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">{service.title}</h3>
+                <p className="text-red-100 text-sm mb-4 leading-relaxed flex-grow">{service.description}</p>
+                <div className="space-y-2 mb-6">
+                  {service.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center space-x-2 text-sm text-red-200">
+                      <CheckCircle className="h-4 w-4 flex-shrink-0 text-red-400" />
+                      <span>{feature}</span>
                     </div>
                   ))}
                 </div>
-
-                <button className="w-full bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold py-3 rounded-xl hover:scale-105 transition-all duration-300">
-                  Get Started
+                <button className={`w-full font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 ${
+                  service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
+                    ? 'crimson-gradient text-white' 
+                    : 'gold-gradient text-white'
+                }`}>
+                  {service.cta}
                 </button>
               </div>
             ))}
@@ -683,41 +626,55 @@ const Home = () => {
         </div>
       </section>
 
-      {/* NEW: Team Section */}
-      <section
-        id="team"
-        ref={(el) => (sectionRefs.current.team = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              Meet Our Experts
+      {/* Testimonials Section */}
+      <section className="py-20 bg-gradient-to-b from-black to-red-950/30 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold crimson-gradient bg-clip-text text-transparent mb-6">
+              Success Stories
             </h2>
-            <p className="text-xl text-gray-300">
-              Certified professionals dedicated to serving you
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Hear from our community members who have transformed their lives
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-pink-500/20 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center"
-              >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-24 h-24 rounded-full object-cover mx-auto mb-4 border-4 border-pink-500/30"
-                />
-                <h3 className="text-xl font-semibold text-white mb-2">{member.name}</h3>
-                <p className="text-purple-300 mb-2">{member.role}</p>
-                <p className="text-gray-400 text-sm mb-1">Experience: {member.experience}</p>
-                <p className="text-gray-400 text-sm">Specialty: {member.specialty}</p>
-                <div className="mt-4 flex justify-center space-x-2">
-                  <BadgeCheck className="h-5 w-5 text-blue-400" />
-                  <ShieldCheck className="h-5 w-5 text-green-400" />
-                  <Award className="h-5 w-5 text-yellow-400" />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Michael R.",
+                role: "CDL Graduate",
+                content: "From unemployed to earning $85k/year in 6 months. The training changed my life.",
+                avatar: "🚚",
+                rating: 5
+              },
+              {
+                name: "Sarah K.",
+                role: "Creditor Academy",
+                content: "The financial strategies helped me clear $30k debt and start building wealth.",
+                avatar: "💼",
+                rating: 5
+              },
+              {
+                name: "James L.",
+                role: "Auto Client",
+                content: "Professional audio installation that exceeded all my expectations. Worth every penny.",
+                avatar: "🔊",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-red-600/20 transition-all duration-500 hover:scale-105">
+                <div className="flex items-center space-x-2 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 fill-yellow-500 text-yellow-500" />
+                  ))}
+                </div>
+                <p className="text-red-100 mb-6 italic">"{testimonial.content}"</p>
+                <div className="flex items-center space-x-4">
+                  <div className="text-2xl">{testimonial.avatar}</div>
+                  <div>
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-red-300">{testimonial.role}</div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -725,90 +682,201 @@ const Home = () => {
         </div>
       </section>
 
-      {/* NEW: FAQ Section */}
-      <section
-        id="faq"
-        ref={(el) => (sectionRefs.current.faq = el)}
-        className="py-16 lg:py-24 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden"
-      >
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-blue-400 bg-clip-text text-transparent mb-4 animate-gradient">
-              Frequently Asked Questions
+      {/* Document Management Section */}
+      <section className="py-20 lg:py-28 bg-gradient-to-b from-red-950/30 to-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold crimson-gradient bg-clip-text text-transparent animate-gradient mb-6">
+              Smart Document Management
             </h2>
-            <p className="text-xl text-gray-300">
-              Quick answers to common questions
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Never dread paperwork again. Our secure system organizes, stores, and alerts you to maintain compliance effortlessly.
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-6">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-gray-800/70 backdrop-blur-sm rounded-2xl p-6 border border-blue-500/20 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                <h3 className="text-lg font-semibold text-white mb-3 flex items-center space-x-2">
-                  <MessageCircle className="h-5 w-5 text-blue-400" />
-                  <span>{faq.question}</span>
-                </h3>
-                <p className="text-gray-300 pl-7">{faq.answer}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {documentFeatures.map((feature, index) => (
+              <div key={index} className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-red-600/20 text-center transition-all duration-500 hover:-translate-y-2">
+                <div className="inline-flex p-3 rounded-xl mb-4 bg-red-600/20 text-red-400">
+                  {feature.icon}
+                </div>
+                <h3 className="text-lg font-semibold text-white mb-3">{feature.title}</h3>
+                <p className="text-red-100 text-sm">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button className="crimson-gradient text-white font-semibold py-4 px-8 rounded-xl shadow-2xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2 mx-auto">
+              <Smartphone className="h-5 w-5" />
+              <span>Download Our App (F-Droid/Aurora)</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Service Selector */}
+      <section className="py-20 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold crimson-gradient bg-clip-text text-transparent mb-6">
+              Find Your Path
+            </h2>
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Select your goal and discover the perfect service for you
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[
+              { icon: "💼", title: "Career Change", services: ["CDL Training", "Creditor Academy"] },
+              { icon: "🚗", title: "Vehicle Services", services: ["Auto Customization", "Audio Systems"] },
+              { icon: "📱", title: "Tech & Privacy", services: ["Software Development", "HAM Radio"] }
+            ].map((category, index) => (
+              <div key={index} className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-red-600/30 text-center transition-all duration-500 hover:scale-105 group cursor-pointer">
+                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {category.icon}
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-4">{category.title}</h3>
+                <div className="space-y-2">
+                  {category.services.map((service, serviceIndex) => (
+                    <div key={serviceIndex} className="text-red-200 text-sm py-2 px-3 bg-red-600/10 rounded-lg">
+                      {service}
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full mt-4 bg-red-600 text-white font-semibold py-2 rounded-lg transition-all duration-300 hover:scale-105">
+                  Explore Options
+                </button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-<section
-  id="cta"
-  ref={(el) => (sectionRefs.current.cta = el)}
-  className="relative bg-gradient-to-br from-white via-gray-50 to-gray-100 text-gray-900 py-16 lg:py-24 overflow-hidden border-t border-gray-200"
->
-  <div className="absolute inset-0 bg-white/70"></div>
-  <div className="absolute -top-48 -left-48 w-96 h-96 bg-gray-200/50 rounded-full blur-3xl animate-float"></div>
-  <div className="absolute -bottom-48 -right-48 w-96 h-96 bg-gray-300/40 rounded-full blur-3xl animate-float-delay"></div>
-  <div className="absolute top-1/2 left-1/4 w-64 h-64 bg-gray-100/60 rounded-full blur-3xl animate-float-slow"></div>
-  
-  <div className="container mx-auto px-4 text-center relative z-10">
-    <div className="max-w-3xl mx-auto space-y-8">
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-        Need Professional Service Today?
-      </h2>
-      <p className="text-xl text-gray-700 leading-relaxed">
-        Join thousands of satisfied customers who trust us for their healthcare, 
-        electronics repair, and tutoring needs. Quick, reliable, and affordable.
-      </p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Link
-          to="/book"
-          className="bg-gradient-to-r from-gray-900 to-black text-white font-semibold py-3 px-6 rounded-xl shadow-lg flex items-center justify-center space-x-2 group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:shadow-xl"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-gray-900 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <span className="relative z-10 flex items-center space-x-2 transition-transform duration-300 group-hover:translate-x-1">
-            <Calendar className="h-5 w-5" />
-            <span>Book Service Now</span>
-          </span>
-        </Link>
-        <Link
-          to="/contact"
-          className="border-2 border-gray-800 text-gray-900 font-medium py-3 px-6 rounded-xl bg-white/90 backdrop-blur-sm flex items-center justify-center space-x-2 relative overflow-hidden group transition-all duration-300 hover:scale-105 hover:bg-gray-50 hover:shadow-lg"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-800/10 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <span className="relative z-10 flex items-center space-x-2 transition-transform duration-300 group-hover:translate-x-1">
-            <Phone className="h-5 w-5" />
-            <span>Call: (555) 123-4567</span>
-          </span>
-        </Link>
-      </div>
-      <div className="text-gray-600 text-sm flex items-center justify-center">
-        <Shield className="h-4 w-4 mr-2 text-gray-700" />
-        All services include satisfaction guarantee and warranty
-      </div>
-    </div>
-  </div>
-</section>
+      {/* Creditor Academy Section */}
+      <section className="py-20 lg:py-28 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold gold-gradient bg-clip-text text-transparent animate-gradient mb-6">
+              Creditor Academy
+            </h2>
+            <p className="text-xl text-amber-100 max-w-3xl mx-auto">
+              Your pathway to financial mastery and private sector success. Start with basics, advance to premium with accumulated credits.
+            </p>
+          </div>
 
-      {/* Chat Widget */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {creditorAcademy.map((level, index) => (
+              <div key={index} className={`rounded-2xl p-8 bg-gradient-to-br ${level.color} border border-amber-600/30 backdrop-blur-sm transition-all duration-500 hover:-translate-y-2`}>
+                <h3 className="text-2xl font-bold text-white mb-4">{level.level}</h3>
+                <p className="text-amber-100 mb-6">{level.description}</p>
+                <div className="space-y-3">
+                  {level.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className="flex items-center space-x-3 text-amber-200">
+                      <CheckCircle className="h-5 w-5 text-amber-400 flex-shrink-0" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+                <button className="w-full bg-amber-600 text-white font-semibold py-3 rounded-xl mt-6 transition-all duration-300 hover:scale-105">
+                  {index === 0 ? 'Start Basic Training' : 'Enroll in Premium'}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-black relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold crimson-gradient bg-clip-text text-transparent mb-6">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Get answers to common questions about our services
+            </p>
+          </div>
+          
+          <div className="max-w-4xl mx-auto space-y-4">
+            {[
+              {
+                question: "How long does CDL training take?",
+                answer: "Our CDL training programs typically take 4-6 weeks, with flexible scheduling options available."
+              },
+              {
+                question: "Is financial aid available for Creditor Academy?",
+                answer: "Yes, we offer payment plans and financing options. Contact us to discuss available options."
+              },
+              {
+                question: "Do you provide job placement assistance?",
+                answer: "Absolutely! We have partnerships with major employers and offer lifetime placement support."
+              },
+              {
+                question: "Are your services available nationwide?",
+                answer: "Yes, we serve clients across the United States with both in-person and remote options."
+              }
+            ].map((faq, index) => (
+              <FAQItem key={index} question={faq.question} answer={faq.answer} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section - Commented Out
+      <section className="py-20 bg-gradient-to-b from-black to-red-950/30 relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold gold-gradient bg-clip-text text-transparent mb-6">
+              Trusted Partnerships
+            </h2>
+            <p className="text-xl text-amber-100 max-w-3xl mx-auto">
+              Working with industry leaders to deliver excellence
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60 hover:opacity-100 transition-opacity duration-300">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="bg-white/5 rounded-xl p-6 border border-amber-600/20 backdrop-blur-sm transition-all duration-500 hover:scale-110 hover:bg-white/10">
+                <div className="text-2xl font-bold text-amber-400 text-center">
+                  Partner {index + 1}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      */}
+
+      {/* CTA Section */}
+      <section className="py-20 lg:py-28 bg-white text-gray-900 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/brushed-alum.png')] opacity-5"></div>
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <div className="max-w-3xl mx-auto space-y-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-red-600 via-yellow-500 to-red-600 bg-clip-text text-transparent">
+              Ready to Take Dominion?
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Join our global conglomerate and start building your private future today. 
+              From CDL training to financial mastery, we provide the pathway.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact" className="relative overflow-hidden group bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2">
+                <Phone className="h-5 w-5" />
+                <span>Call: 1-888-997-3744</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-yellow-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></span>
+              </Link>
+              <Link to="/creditor-academy" className="relative overflow-hidden group border-2 border-red-600 text-red-600 font-semibold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 hover:bg-red-50 flex items-center justify-center space-x-2">
+                <span>Start Your Journey</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-yellow-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <ChatWidget />
     </div>
   )

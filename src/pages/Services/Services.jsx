@@ -9,12 +9,180 @@ export default function ServiceNeighborhood() {
   const [aiResponse, setAiResponse] = useState('');
 
   const neighborhoodBlocks = [
+    // Automotive & Technical Services (Black/Gold)
+    {
+      id: 'automotive',
+      title: 'Automotive & Technical',
+      color: '#FF8C00', // Dark Orange
+      icon: '🚗',
+      description: 'Professional auto customization, CDL training, and HAM radio services',
+      buildings: [
+        { 
+          name: 'Auto Customization', 
+          available: true, 
+          time: '9AM-7PM',
+          description: 'Professional vehicle customization and upgrades',
+          provider: 'TurboTech',
+          rating: '4.9/5'
+        },
+        { 
+          name: 'CDL Training', 
+          available: true, 
+          time: '8AM-6PM',
+          description: 'Commercial Driver\'s License training program',
+          provider: 'RoadMasters',
+          rating: '4.8/5'
+        },
+        { 
+          name: 'Audio Systems', 
+          available: true, 
+          time: '10AM-8PM',
+          description: 'Premium car audio installation and setup',
+          provider: 'SoundCraft',
+          rating: '4.7/5'
+        },
+        { 
+          name: 'Performance Tuning', 
+          available: true, 
+          time: '9AM-6PM',
+          description: 'Vehicle performance enhancement services',
+          provider: 'TurboTech',
+          rating: '4.9/5'
+        }
+      ]
+    },
+    // Financial & GRC Services (Apricot Tones)
+    {
+      id: 'financial',
+      title: 'Financial & GRC',
+      color: '#FFA500', // Orange
+      icon: '�',
+      description: 'Financial planning, GRC, and authorized user account management',
+      buildings: [
+        { 
+          name: 'Investment Planning', 
+          available: true, 
+          time: '9AM-5PM',
+          description: 'Personalized investment strategies',
+          provider: 'WealthGuard',
+          rating: '4.8/5'
+        },
+        { 
+          name: 'Credit Building', 
+          available: true, 
+          time: '24/7',
+          description: 'Credit score improvement programs',
+          provider: 'CreditPlus',
+          rating: '4.6/5'
+        },
+        { 
+          name: 'Tax Services', 
+          available: true, 
+          time: '8AM-8PM',
+          description: 'Professional tax preparation and filing',
+          provider: 'TaxPro',
+          rating: '4.9/5'
+        },
+        { 
+          name: 'Retirement Planning', 
+          available: true, 
+          time: '9AM-5PM',
+          description: 'Comprehensive retirement solutions',
+          provider: 'GoldenYears',
+          rating: '4.7/5'
+        }
+      ]
+    },
+    // Education & Home Schooling (Rich Muted Tones)
+    {
+      id: 'education',
+      title: 'Education & Home School',
+      color: '#FF8C00', // Dark Orange
+      icon: '📚',
+      description: 'Customized home schooling programs and educational resources',
+      buildings: [
+        { 
+          name: 'K-5 Curriculum', 
+          available: true, 
+          time: '7AM-3PM',
+          description: 'Elementary level home education packages',
+          provider: 'EduHome',
+          rating: '4.9/5',
+          ageGroup: '5-10 years'
+        },
+        { 
+          name: 'Middle School', 
+          available: true, 
+          time: '8AM-4PM',
+          description: 'Comprehensive middle school curriculum',
+          provider: 'LearnBright',
+          rating: '4.8/5',
+          ageGroup: '11-13 years'
+        },
+        { 
+          name: 'High School', 
+          available: true, 
+          time: 'Flexible',
+          description: 'College prep and advanced placement courses',
+          provider: 'Academy Prep',
+          rating: '4.9/5',
+          ageGroup: '14-18 years'
+        },
+        { 
+          name: 'Special Education', 
+          available: true, 
+          time: 'By Appointment',
+          description: 'Personalized learning plans for special needs',
+          provider: 'InclusiveEd',
+          rating: '5.0/5',
+          ageGroup: 'All Ages'
+        }
+      ]
+    },
+    // Document & Compliance Management
+    {
+      id: 'documents',
+      title: 'Document Management',
+      color: '#D2691E', // Chocolate
+      icon: '📋',
+      description: 'Secure document storage and compliance tracking system',
+      buildings: [
+        { 
+          name: 'Document Vault', 
+          available: true, 
+          time: '24/7',
+          description: 'Secure cloud storage for all important documents',
+          provider: 'DocuSafe',
+          rating: '4.9/5',
+          features: ['Encrypted Storage', 'Mobile Access', 'Unlimited Uploads']
+        },
+        { 
+          name: 'Compliance Tracker', 
+          available: true, 
+          time: '24/7',
+          description: 'Never miss a deadline with automated compliance tracking',
+          provider: 'ComplyRight',
+          rating: '5.0/5',
+          features: ['Deadline Alerts', 'Document Expiry', 'Audit Trails']
+        },
+        { 
+          name: 'Mobile App', 
+          available: true, 
+          time: '24/7',
+          description: 'Access your documents on the go',
+          provider: 'Available on F-Droid & Aurora',
+          rating: '4.8/5',
+          features: ['Offline Access', 'Biometric Login', 'Quick Scan']
+        }
+      ]
+    },
+    // Healthcare & Licensing
     {
       id: 'healthcare',
-      title: 'Healthcare District',
-      color: '#DC2626',
+      title: 'Healthcare & Licensing',
+      color: '#8B0000', // Dark Red (kept the same)
       icon: '🏥',
-      description: 'Professional medical services and healthcare support for all your wellness needs',
+      description: 'Healthcare licensing and home healthcare support services',
       buildings: [
         { 
           name: 'Emergency Care', 
@@ -50,85 +218,124 @@ export default function ServiceNeighborhood() {
         }
       ]
     },
+    // Software & App Development
     {
-      id: 'education',
-      title: 'Learning Campus',
-      color: '#2563EB',
-      icon: '🎓',
-      description: 'Educational services and learning opportunities for all ages',
+      id: 'development',
+      title: 'Software Development',
+      color: '#FF8C00', // Dark Orange
+      icon: '�‍��',
+      description: 'Custom software and mobile app development services',
       buildings: [
         { 
-          name: 'Home Tutoring', 
+          name: 'Web Development', 
           available: true, 
-          time: '7AM-10PM',
-          description: 'One-on-one tutoring for all subjects',
-          provider: 'EduMentor Pro',
+          time: '24/7',
+          description: 'Custom website and web application development',
+          provider: 'WebCraft',
           rating: '4.9/5'
         },
         { 
-          name: 'Course Library', 
+          name: 'Cybersecurity', 
           available: true, 
           time: '24/7',
-          description: 'Access to thousands of online courses',
-          provider: 'LearnHub',
+          description: 'Comprehensive digital protection services',
+          provider: 'SecureNet',
+          rating: '5.0/5'
+        },
+        { 
+          name: 'Cloud Services', 
+          available: true, 
+          time: '24/7',
+          description: 'Secure cloud storage and computing solutions',
+          provider: 'CloudForge',
           rating: '4.8/5'
         },
         { 
-          name: 'Skill Workshops', 
+          name: 'IT Support', 
           available: true, 
-          time: '9AM-8PM',
-          description: 'Hands-on workshops for skill development',
-          provider: 'SkillCraft Academy',
+          time: '8AM-10PM',
+          description: 'Professional technical support and troubleshooting',
+          provider: 'TechAssist',
           rating: '4.7/5'
-        },
-        { 
-          name: 'Career Counseling', 
-          available: true, 
-          time: '10AM-6PM',
-          description: 'Professional career guidance and planning',
-          provider: 'CareerPath Pro',
-          rating: '4.9/5'
         }
       ]
     },
+    // Creditor Academy
     {
-      id: 'home',
-      title: 'Residential Zone',
-      color: '#059669',
-      icon: '🏠',
-      description: 'Home maintenance and improvement services',
+      id: 'creditor-academy',
+      title: 'Creditor Academy',
+      color: '#FF8C00', // Dark Orange
+      icon: '🎓',
+      description: 'Master financial independence and credit building',
       buildings: [
         { 
-          name: 'Appliance Repair', 
+          name: 'Basic Training', 
           available: true, 
-          time: '8AM-8PM',
-          description: 'Expert repair for all home appliances',
-          provider: 'FixIt Pros',
-          rating: '4.6/5'
+          time: 'Self-Paced',
+          description: 'Foundations of credit and financial management',
+          provider: 'Creditor Academy',
+          rating: '5.0/5',
+          level: 'Beginner'
         },
         { 
-          name: 'Cleaning Services', 
+          name: 'Advanced Strategies', 
           available: true, 
-          time: '7AM-9PM',
-          description: 'Professional home cleaning services',
-          provider: 'CleanTeam',
+          time: 'Self-Paced',
+          description: 'Advanced credit building techniques',
+          provider: 'Creditor Academy',
+          rating: '4.9/5',
+          level: 'Intermediate'
+        },
+        { 
+          name: 'Master Class', 
+          available: true, 
+          time: 'By Application',
+          description: 'Elite financial strategies and mentorship',
+          provider: 'Creditor Academy',
+          rating: '5.0/5',
+          level: 'Advanced'
+        }
+      ]
+    },
+    // Security & Protection
+    {
+      id: 'security',
+      title: 'Security Services',
+      color: '#8B0000', // Dark Red (kept the same)
+      icon: '�',
+      description: 'Comprehensive security solutions for all your needs',
+      buildings: [
+        { 
+          name: 'Home Security', 
+          available: true, 
+          time: '24/7',
+          description: 'Complete home security systems',
+          provider: 'SafeHaven',
+          rating: '4.9/5'
+        },
+        { 
+          name: 'Cybersecurity', 
+          available: true, 
+          time: '24/7',
+          description: 'Digital protection and threat prevention',
+          provider: 'CyberShield',
+          rating: '5.0/5'
+        },
+        { 
+          name: 'Event Security', 
+          available: true, 
+          time: '24/7',
+          description: 'Professional security for events and gatherings',
+          provider: 'EventGuard',
           rating: '4.8/5'
         },
         { 
-          name: 'Plumbing & Electrical', 
+          name: 'VIP Protection', 
           available: true, 
           time: '24/7',
-          description: 'Emergency plumbing and electrical services',
-          provider: 'HomeCare Experts',
-          rating: '4.7/5'
-        },
-        { 
-          name: 'Home Maintenance', 
-          available: true, 
-          time: '8AM-6PM',
-          description: 'Regular home maintenance and checkups',
-          provider: 'Maintenance Masters',
-          rating: '4.5/5'
+          description: 'Executive and VIP security services',
+          provider: 'EliteGuard',
+          rating: '5.0/5'
         }
       ]
     }
@@ -262,7 +469,7 @@ export default function ServiceNeighborhood() {
       {/* Quick Actions */}
       <div className="p-6 border-t border-gray-700">
         <div className="space-y-2">
-          <button className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors">
+          <button className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
             📞 Contact All Providers
           </button>
           <button className="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors border border-gray-600">
@@ -274,12 +481,12 @@ export default function ServiceNeighborhood() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-black to-purple-950 pt-20 pb-20">
+    <div className="min-h-screen bg-black pt-20 pb-20">
       {/* Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-purple-900/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-800/3 rounded-full blur-3xl"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(128,0,128,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(128,0,128,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-red-800/10 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,140,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
       </div>
 
       {/* Category Detail Panel Overlay */}
@@ -420,7 +627,7 @@ export default function ServiceNeighborhood() {
                     className="text-center"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-purple-400 text-sm font-medium bg-purple-500/10 px-3 py-1 rounded-full border border-purple-500/20">
+                    <span className="text-red-400 text-sm font-medium bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
                       +{block.buildings.length - 2} more services →
                     </span>
                   </motion.div>
@@ -462,9 +669,8 @@ export default function ServiceNeighborhood() {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-xl transition-all font-medium flex items-center space-x-2"
+              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white rounded-xl transition-all font-medium flex items-center space-x-2 shadow-lg hover:shadow-red-500/20"
             >
-              
               <span>View All Maps</span>
             </motion.button>
             <motion.button
