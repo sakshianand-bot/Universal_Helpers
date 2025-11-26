@@ -2,91 +2,116 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function About() {
-  const [activeSection, setActiveSection] = useState('privacy');
+  const [activeSection, setActiveSection] = useState('pathway');
   const [isAutoRotating, setIsAutoRotating] = useState(true);
   const [clickCount, setClickCount] = useState(0);
+  const [progress, setProgress] = useState(0);
   const autoRotateRef = useRef(null);
   const sectionRef = useRef(null);
 
   const sections = [
-    { id: 'privacy', label: 'Your Privacy' },
-    { id: 'solution', label: 'Your Solution' },
-    { id: 'contribution', label: 'Your Contribution' },
-    { id: 'accolades', label: 'Your Accolades' }
+    { id: 'pathway', label: 'The Pathway' },
+    { id: 'how-it-works', label: 'How It Works' },
+    { id: 'training', label: 'Training System' },
+    { id: 'benefits', label: 'Your Benefits' },
+    { id: 'academy', label: 'Private Academy' }
   ];
 
-  const privacyFeatures = [
+  const pathwaySteps = [
     {
-      icon: '🚫',
-      title: 'No Ads',
-      description: 'You won\'t find ads in any of our services, including our free consultations and basic service matching.'
+      step: 1,
+      title: 'Work & Contribute',
+      description: 'Complete tasks and projects within the organization',
+      outcome: 'Build Private Credits through meaningful work',
+      icon: '💼'
     },
     {
-      icon: '🔒',
-      title: 'No Tracking',
-      description: 'We do not track your activity or movements through our platform. Your privacy is always respected.'
+      step: 2,
+      title: 'Earn Training Access',
+      description: 'Use accumulated credits for Academy enrollment',
+      outcome: 'Unlock private domain knowledge and principles',
+      icon: '🎓'
     },
     {
-      icon: '🏠',
-      title: 'Direct Provider Connection',
-      description: 'We connect you directly with service providers without third-party intermediaries or data sharing.'
+      step: 3,
+      title: 'Foundational Training',
+      description: 'Master essential private operations concepts',
+      outcome: 'Complete contracts, sovereignty, PMA, and trusts training',
+      icon: '🏛️'
+    },
+    {
+      step: 4,
+      title: 'Advance to Premium',
+      description: 'Optional progression to mastery courses',
+      outcome: 'Continue education without financial burden',
+      icon: '⭐'
     }
   ];
 
-  const solutionFeatures = [
+  const trainingModules = [
     {
-      icon: '🌱',
-      title: 'Homegrown Platform',
-      description: 'We built our entire service matching platform from the ground up, specifically designed for healthcare, education, and home services.'
+      module: 'Foundation',
+      courses: ['Private Contracts', 'Sovereign Principles', 'PMA Fundamentals', 'Trust Structures', 'Private Operations'],
+      duration: '8-12 weeks',
+      credits: 100,
+      icon: '🔰'
     },
     {
-      icon: '🔗',
-      title: 'Integrated Services',
-      description: 'Seamlessly switch between healthcare, education, and home services within one unified platform.'
+      module: 'Premium Mastery',
+      courses: ['Advanced Contracts', 'Private Banking', 'Asset Protection', 'International Law', 'Master Operations'],
+      duration: '12-16 weeks',
+      credits: 200,
+      icon: '🎯'
+    }
+  ];
+
+  const benefits = [
+    {
+      icon: '🧠',
+      title: 'Knowledgeable',
+      description: 'Master the principles and structure of private operations'
     },
     {
       icon: '⚡',
-      title: 'Instant Matching',
-      description: 'Our smart algorithm instantly connects you with the most suitable service providers based on your specific needs.'
+      title: 'Self-Reliant',
+      description: 'Build confidence to operate independently in private domains'
+    },
+    {
+      icon: '🚀',
+      title: 'Empowered',
+      description: 'Gain the tools and knowledge for true personal empowerment'
     },
     {
       icon: '🛡️',
-      title: 'Verified & Certified',
-      description: 'All service providers are thoroughly verified, certified, and background-checked for your safety and peace of mind.'
+      title: 'Prepared',
+      description: 'Ready to operate fully in private with complete preparation'
     }
   ];
 
-  const contributionFeatures = [
+  const outcomes = [
     {
-      icon: '🎓',
-      title: 'Skill Development Programs',
-      description: 'We partner with local communities to provide free skill development programs for aspiring service professionals.'
+      metric: 'Lifestyle Stability',
+      description: 'Build a stable foundation for long-term personal growth',
+      icon: '🏠'
     },
     {
-      icon: '🏘️',
-      title: 'Rural Service Initiatives',
-      description: 'Extending our healthcare, education, and home services to underserved rural communities across the region.'
+      metric: 'Financial Confidence',
+      description: 'Operate with financial certainty and strategic advantage',
+      icon: '💎'
     },
     {
-      icon: '🌱',
-      title: 'Eco-Friendly Operations',
-      description: 'Our offices and data centers run on renewable energy, minimizing our environmental footprint.'
+      metric: 'Long-term Growth',
+      description: 'Sustainable personal and professional development',
+      icon: '📈'
     },
     {
-      icon: '🇮🇳',
-      title: 'Made in India',
-      description: 'Proudly developed in India, serving customers worldwide with locally-built technology solutions.'
+      metric: 'Private Domain Access',
+      description: 'Full integration into private systems and operations',
+      icon: '🔐'
     }
   ];
 
-  const accolades = [
-    { name: 'Best Service Platform 2023', organization: 'Tech Innovation Awards' },
-    { name: 'Customer Excellence Award', organization: 'Service Industry Association' },
-    { name: 'Top Startup', organization: 'Digital India Initiative' },
-    { name: 'Innovation in Healthcare', organization: 'HealthTech Forum' }
-  ];
-
-  // Auto-rotation effect - 4 seconds
+  // Auto-rotation effect
   useEffect(() => {
     if (!isAutoRotating) return;
 
@@ -96,7 +121,7 @@ export default function About() {
         const nextIndex = (currentIndex + 1) % sections.length;
         return sections[nextIndex].id;
       });
-    }, 4000); // 4 seconds
+    }, 3000);
 
     return () => {
       if (autoRotateRef.current) {
@@ -105,27 +130,29 @@ export default function About() {
     };
   }, [isAutoRotating, sections]);
 
-  // Handle tap anywhere in the content section
+  // Progress simulation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress(prev => (prev >= 100 ? 0 : prev + 10));
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   const handleContentTap = () => {
-    // Double tap logic for pause
     const newClickCount = clickCount + 1;
     setClickCount(newClickCount);
 
-    // Reset click count after 500ms
     setTimeout(() => {
       setClickCount(0);
     }, 500);
 
-    // Double tap detected (2 clicks) - pause auto-rotation
     if (newClickCount === 2) {
       setIsAutoRotating(false);
-      // Clear any existing interval immediately
       if (autoRotateRef.current) {
         clearInterval(autoRotateRef.current);
       }
     }
     
-    // Single tap to resume auto-rotation (when paused)
     if (!isAutoRotating) {
       setIsAutoRotating(true);
     }
@@ -143,24 +170,26 @@ export default function About() {
     <div 
       className="min-h-screen pt-20 pb-20 relative overflow-hidden"
       style={{
-        backgroundImage: 'url("https://i.pinimg.com/736x/a0/99/1e/a0991e4ab70886341d1a4fb8ec53f0a1.jpg")',
+        backgroundImage: 'url("/src/assets/smoke.jpg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundAttachment: 'fixed',
+        backgroundRepeat: 'no-repeat'
       }}
     >
       {/* Main Background Overlay */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/80 to-black/70 backdrop-blur-sm"></div>
       
       {/* Corner Image Overlay - Top Right */}
       <div 
         className="absolute top-0 right-0 w-96 h-96 opacity-80 z-0"
         style={{
-          backgroundImage: 'url("https://i.pinimg.com/736x/8c/fc/b4/8cfcb4c32e85f3eee471b67015e20466.jpg")',
+          backgroundImage: 'url("/src/assets/smoke.jpg")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          maskImage: 'radial-gradient(circle at top right, black 30%, transparent 70%)',
-          WebkitMaskImage: 'radial-gradient(circle at top right, black 30%, transparent 70%)'
+          backgroundPosition: 'top right',
+          maskImage: 'radial-gradient(circle at top right, black 20%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at top right, black 20%, transparent 80%)',
+          filter: 'brightness(1.2)'
         }}
       ></div>
 
@@ -168,11 +197,12 @@ export default function About() {
       <div 
         className="absolute bottom-0 left-0 w-96 h-96 opacity-80 z-0"
         style={{
-          backgroundImage: 'url("https://i.pinimg.com/736x/8c/fc/b4/8cfcb4c32e85f3eee471b67015e20466.jpg")',
+          backgroundImage: 'url("/src/assets/smoke.jpg")',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          maskImage: 'radial-gradient(circle at bottom left, black 30%, transparent 70%)',
-          WebkitMaskImage: 'radial-gradient(circle at bottom left, black 30%, transparent 70%)'
+          backgroundPosition: 'bottom left',
+          maskImage: 'radial-gradient(circle at bottom left, black 20%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(circle at bottom left, black 20%, transparent 80%)',
+          filter: 'brightness(1.2)'
         }}
       ></div>
 
@@ -190,16 +220,16 @@ export default function About() {
             transition={{ delay: 0.2 }}
             className="text-5xl md:text-6xl font-bold text-white mb-6"
           >
-            About Universal-Helper
+            Pathway to the <span className="bg-gradient-to-r from-amber-600 to-red-800 text-transparent bg-clip-text font-bold">Private</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed"
+            className="text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed"
           >
-            Connecting you with trusted healthcare, education, and home service professionals 
-            through a platform built on privacy, innovation, and community values.
+            Earn Your Way Into Private Membership & Training. At our Global Conglomerate, we empower individuals 
+            to build stable, secure, and private lives through a clear pathway from public systems to private domains.
           </motion.p>
         </motion.section>
 
@@ -220,8 +250,8 @@ export default function About() {
                   onClick={() => handleSectionClick(tab.id)}
                   className={`px-6 py-3 rounded-xl font-semibold transition-all ${
                     activeSection === tab.id
-                      ? 'bg-purple-600 text-white shadow-lg'
-                      : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                      ? 'bg-gradient-to-r from-amber-600 to-red-800 text-white shadow-lg shadow-amber-700/25'
+                      : 'bg-gray-800/80 text-gray-300 hover:bg-gray-700/80 border border-amber-900/50'
                   }`}
                 >
                   {tab.label}
@@ -237,35 +267,27 @@ export default function About() {
                     key={index}
                     className={`w-2 h-2 rounded-full transition-colors ${
                       index === getCurrentSectionIndex() 
-                        ? 'bg-purple-500' 
+                        ? 'bg-amber-600' 
                         : 'bg-gray-600'
                     }`}
                   />
                 ))}
               </div>
-              
-              <span className="text-xs">
-                {isAutoRotating ? 'Auto-rotating every 4s' : 'Auto-rotation paused'}
-              </span>
-              
-              <span className="text-xs">
-                Double-tap to pause • Single-tap to resume
-              </span>
             </div>
           </div>
         </motion.section>
 
-        {/* Main Content Sections - Tap area */}
+        {/* Main Content Sections */}
         <div 
           ref={sectionRef}
           onClick={handleContentTap}
           className="cursor-pointer"
         >
           <AnimatePresence mode="wait">
-            {/* Privacy Section */}
-            {activeSection === 'privacy' && (
+            {/* Pathway Section */}
+            {activeSection === 'pathway' && (
               <motion.section
-                key="privacy"
+                key="pathway"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
@@ -273,36 +295,127 @@ export default function About() {
                 className="mb-16"
               >
                 <div className="text-center mb-12">
-                  <h2 className="text-4xl font-bold text-white mb-4">Your Privacy</h2>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                    We believe that your trust in us goes beyond service matching and includes respecting 
-                    and maintaining your privacy. That's why we are committed to:
+                  <h2 className="text-4xl font-bold text-white mb-4">The Clear Pathway</h2>
+                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    A structured journey from public participation to private mastery, ensuring 
+                    confidence and competence at every step.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {privacyFeatures.map((feature, index) => (
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                  {pathwaySteps.map((step, index) => (
                     <motion.div
-                      key={feature.title}
+                      key={step.step}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
+                      transition={{ delay: 0.1 + index * 0.1 }}
                       whileHover={{ scale: 1.02, y: -5 }}
-                      className="bg-gray-900/70 backdrop-blur-md rounded-2xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-300"
+                      className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-amber-900/50 hover:border-amber-600 transition-all duration-300 group"
                     >
-                      <div className="text-4xl mb-4 text-center">{feature.icon}</div>
-                      <h3 className="text-xl font-bold text-white text-center mb-3">{feature.title}</h3>
-                      <p className="text-gray-300 text-center leading-relaxed">{feature.description}</p>
+                      <div className="flex items-start space-x-4">
+                        <div className="text-3xl">{step.icon}</div>
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-2">
+                            <span className="text-amber-500 font-bold text-lg">Step {step.step}</span>
+                            <div className="w-2 h-2 bg-amber-500 rounded-full"></div>
+                            <h3 className="text-xl font-bold text-white">{step.title}</h3>
+                          </div>
+                          <p className="text-gray-300 mb-3">{step.description}</p>
+                          <div className="bg-amber-900/30 rounded-lg p-3 border border-amber-800/50">
+                            <p className="text-amber-200 text-sm font-semibold">Outcome: {step.outcome}</p>
+                          </div>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
+                </div>
+
+                {/* Progress Visualization */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="bg-gray-900/60 rounded-2xl p-8 border border-amber-900/50"
+                >
+                  <h3 className="text-2xl font-bold text-white text-center mb-6">Your Journey Progress</h3>
+                  <div className="w-full bg-gray-700 rounded-full h-4 mb-4">
+                    <motion.div
+                      className="bg-gradient-to-r from-amber-600 to-red-800 h-4 rounded-full"
+                      initial={{ width: 0 }}
+                      animate={{ width: `${progress}%` }}
+                      transition={{ duration: 1 }}
+                    ></motion.div>
+                  </div>
+                  <p className="text-gray-300 text-center">
+                    Simulated progress through the private pathway system
+                  </p>
+                </motion.div>
+              </motion.section>
+            )}
+
+            {/* How It Works Section */}
+            {activeSection === 'how-it-works' && (
+              <motion.section
+                key="how-it-works"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+                className="mb-16"
+              >
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-white mb-4">How The System Works</h2>
+                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    A credit-based ecosystem that rewards contribution with knowledge and private access.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-gradient-to-br from-amber-900/50 to-red-900/30 rounded-2xl p-6 border border-amber-600/50 text-center"
+                  >
+                    <div className="text-4xl mb-4">💼</div>
+                    <h3 className="text-xl font-bold text-white mb-3">Work & Contribute</h3>
+                    <p className="text-gray-300">
+                      Complete meaningful tasks and projects to build your Private Credits pool
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gradient-to-br from-amber-900/50 to-red-900/30 rounded-2xl p-6 border border-amber-600/50 text-center"
+                  >
+                    <div className="text-4xl mb-4">🎓</div>
+                    <h3 className="text-xl font-bold text-white mb-3">Earn Training Access</h3>
+                    <p className="text-gray-300">
+                      Use accumulated credits to enroll in Creditor Academy's private programs
+                    </p>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gradient-to-br from-amber-900/50 to-red-900/30 rounded-2xl p-6 border border-amber-600/50 text-center"
+                  >
+                    <div className="text-4xl mb-4">🚀</div>
+                    <h3 className="text-xl font-bold text-white mb-3">Advance Confidently</h3>
+                    <p className="text-gray-300">
+                      Progress through training without financial burden, fully prepared for private operations
+                    </p>
+                  </motion.div>
                 </div>
               </motion.section>
             )}
 
-            {/* Solution Section */}
-            {activeSection === 'solution' && (
+            {/* Training System Section */}
+            {activeSection === 'training' && (
               <motion.section
-                key="solution"
+                key="training"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
@@ -310,36 +423,59 @@ export default function About() {
                 className="mb-16"
               >
                 <div className="text-center mb-12">
-                  <h2 className="text-4xl font-bold text-white mb-4">Your Solution</h2>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                    We believe that you deserve a unified service platform that meets your unique needs. 
-                    That's why our platform is:
+                  <h2 className="text-4xl font-bold text-white mb-4">Training System</h2>
+                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Structured learning paths designed to build competence and confidence in private operations.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {solutionFeatures.map((feature, index) => (
+                  {trainingModules.map((module, index) => (
                     <motion.div
-                      key={feature.title}
+                      key={module.module}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2 + index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      className="bg-gray-900/70 backdrop-blur-md rounded-2xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-300"
+                      whileHover={{ scale: 1.02 }}
+                      className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-amber-900/50 hover:border-amber-600 transition-all duration-300"
                     >
-                      <div className="text-4xl mb-4 text-center">{feature.icon}</div>
-                      <h3 className="text-xl font-bold text-white text-center mb-3">{feature.title}</h3>
-                      <p className="text-gray-300 text-center leading-relaxed">{feature.description}</p>
+                      <div className="flex items-center space-x-3 mb-4">
+                        <div className="text-3xl">{module.icon}</div>
+                        <h3 className="text-2xl font-bold text-white">{module.module}</h3>
+                      </div>
+                      
+                      <div className="mb-4">
+                        <h4 className="text-amber-400 font-semibold mb-2">Courses Included:</h4>
+                        <ul className="space-y-1">
+                          {module.courses.map((course, idx) => (
+                            <li key={idx} className="text-gray-300 flex items-center space-x-2">
+                              <span className="text-amber-500">•</span>
+                              <span>{course}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4 text-sm">
+                        <div className="bg-amber-900/30 rounded-lg p-3 text-center">
+                          <p className="text-amber-200 font-semibold">Duration</p>
+                          <p className="text-white">{module.duration}</p>
+                        </div>
+                        <div className="bg-red-900/30 rounded-lg p-3 text-center">
+                          <p className="text-red-200 font-semibold">Credits Required</p>
+                          <p className="text-white">{module.credits}</p>
+                        </div>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
               </motion.section>
             )}
 
-            {/* Contribution Section */}
-            {activeSection === 'contribution' && (
+            {/* Benefits Section */}
+            {activeSection === 'benefits' && (
               <motion.section
-                key="contribution"
+                key="benefits"
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -50 }}
@@ -347,63 +483,125 @@ export default function About() {
                 className="mb-16"
               >
                 <div className="text-center mb-12">
-                  <h2 className="text-4xl font-bold text-white mb-4">Your Contribution</h2>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                    We believe that your success is tied to ours, and at a deeper level, tied to the success 
-                    of the global community. That's why we contribute to the broader community:
+                  <h2 className="text-4xl font-bold text-white mb-4">Your Transformation</h2>
+                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    The comprehensive benefits of completing your journey through our private pathway system.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                  {benefits.map((benefit, index) => (
+                    <motion.div
+                      key={benefit.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -5 }}
+                      className="bg-gray-900/80 backdrop-blur-md rounded-2xl p-6 border border-amber-900/50 hover:border-amber-600 transition-all duration-300 group"
+                    >
+                      <div className="text-4xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">
+                        {benefit.icon}
+                      </div>
+                      <h3 className="text-xl font-bold text-white text-center mb-3">{benefit.title}</h3>
+                      <p className="text-gray-300 text-center leading-relaxed">{benefit.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Outcomes Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {outcomes.map((outcome, index) => (
+                    <motion.div
+                      key={outcome.metric}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                      className="bg-gradient-to-br from-amber-900/40 to-red-900/20 rounded-xl p-4 text-center border border-amber-700/30"
+                    >
+                      <div className="text-2xl mb-2">{outcome.icon}</div>
+                      <h4 className="text-lg font-bold text-white mb-2">{outcome.metric}</h4>
+                      <p className="text-gray-300 text-sm">{outcome.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.section>
+            )}
+
+            {/* Academy Section */}
+            {activeSection === 'academy' && (
+              <motion.section
+                key="academy"
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.5 }}
+                className="mb-16"
+              >
+                <div className="text-center mb-12">
+                  <h2 className="text-4xl font-bold text-white mb-4">Private Academy</h2>
+                  <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Your gateway to private domain mastery. Learn the principles, structure, and operational 
+                    knowledge required for confident private operations.
+                  </p>
+                </div>
+
+                <div className="bg-gradient-to-br from-amber-900/30 to-red-900/20 rounded-3xl p-8 border border-amber-600/50 mb-8">
+                  <h3 className="text-2xl font-bold text-white text-center mb-6">Academy Mission</h3>
+                  <p className="text-gray-200 text-lg text-center leading-relaxed">
+                    To create a workforce and community of individuals who are knowledgeable, self-reliant, 
+                    empowered, and prepared to operate fully in the private domain. This pathway ensures 
+                    lifestyle stability, financial confidence, and long-term growth as you transition into 
+                    the private domain.
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {contributionFeatures.map((feature, index) => (
-                    <motion.div
-                      key={feature.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
-                      whileHover={{ scale: 1.02, y: -5 }}
-                      className="bg-gray-900/70 backdrop-blur-md rounded-2xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-300"
-                    >
-                      <div className="text-4xl mb-4 text-center">{feature.icon}</div>
-                      <h3 className="text-xl font-bold text-white text-center mb-3">{feature.title}</h3>
-                      <p className="text-gray-300 text-center leading-relaxed">{feature.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.section>
-            )}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="bg-gray-900/80 rounded-2xl p-6 border border-amber-900/50"
+                  >
+                    <h4 className="text-xl font-bold text-amber-400 mb-4">What You'll Master</h4>
+                    <ul className="space-y-3">
+                      <li className="flex items-center space-x-3 text-gray-300">
+                        <span className="text-amber-500">✓</span>
+                        <span>Private contract principles and execution</span>
+                      </li>
+                      <li className="flex items-center space-x-3 text-gray-300">
+                        <span className="text-amber-500">✓</span>
+                        <span>Sovereign operations and structures</span>
+                      </li>
+                      <li className="flex items-center space-x-3 text-gray-300">
+                        <span className="text-amber-500">✓</span>
+                        <span>PMA (Private Membership Association) fundamentals</span>
+                      </li>
+                      <li className="flex items-center space-x-3 text-gray-300">
+                        <span className="text-amber-500">✓</span>
+                        <span>Trust establishment and management</span>
+                      </li>
+                      <li className="flex items-center space-x-3 text-gray-300">
+                        <span className="text-amber-500">✓</span>
+                        <span>Complete private operational systems</span>
+                      </li>
+                    </ul>
+                  </motion.div>
 
-            {/* Accolades Section */}
-            {activeSection === 'accolades' && (
-              <motion.section
-                key="accolades"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.5 }}
-                className="mb-16"
-              >
-                <div className="text-center mb-12">
-                  <h2 className="text-4xl font-bold text-white mb-4">Your Accolades</h2>
-                  <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-                    We believe that serving you is our deepest privilege, and we are honored by the 
-                    awards and acknowledgement that result from that service:
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {accolades.map((accolade, index) => (
-                    <motion.div
-                      key={accolade.name}
-                      initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.2 + index * 0.1 }}
-                      className="bg-gray-900/70 backdrop-blur-md rounded-2xl p-6 border border-gray-600 hover:border-purple-400 transition-all duration-300"
-                    >
-                      <h3 className="text-lg font-bold text-white text-center mb-2">{accolade.name}</h3>
-                      <p className="text-gray-400 text-center">{accolade.organization}</p>
-                    </motion.div>
-                  ))}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    className="bg-gray-900/80 rounded-2xl p-6 border border-amber-900/50"
+                  >
+                    <h4 className="text-xl font-bold text-amber-400 mb-4">The Result</h4>
+                    <p className="text-gray-300 mb-4">
+                      Graduates emerge with the confidence, knowledge, and practical skills to operate 
+                      successfully in private domains, fully prepared for long-term stability and growth.
+                    </p>
+                    <div className="bg-amber-900/30 rounded-lg p-4 border border-amber-800/50">
+                      <p className="text-amber-200 font-semibold text-center">
+                        "From public participant to private professional — your journey to empowerment starts here."
+                      </p>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.section>
             )}
@@ -417,25 +615,25 @@ export default function About() {
           transition={{ delay: 0.8 }}
           className="text-center"
         >
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 border border-purple-400">
-            <h2 className="text-3xl font-bold text-white mb-4">Ready to Experience Better Services?</h2>
-            <p className="text-purple-100 text-lg mb-8 max-w-2xl mx-auto">
-              Join thousands who trust us for their healthcare, education, and home service needs
+          <div className="bg-gradient-to-r from-black via-amber-900 to-amber-800 rounded-3xl p-12 border border-amber-600 shadow-2xl shadow-amber-900/30">
+            <h2 className="text-3xl font-bold text-white mb-4">Ready to Begin Your Private Journey?</h2>
+            <p className="text-amber-100 text-lg mb-8 max-w-2xl mx-auto">
+              Join the pathway to private membership and transform your future through earned knowledge and access.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-purple-600 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-colors"
+                className="px-8 py-4 bg-white text-amber-700 rounded-2xl font-bold text-lg hover:bg-amber-50 transition-colors shadow-lg"
               >
-                Find Services
+                Start Earning Credits
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-2xl font-bold text-lg hover:bg-white/10 transition-colors"
               >
-                Learn More
+                Explore Academy
               </motion.button>
             </div>
           </div>

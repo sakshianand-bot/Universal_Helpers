@@ -4,11 +4,11 @@
 
 /* Custom button styles */
 .btn-login {
-  @apply px-4 py-2 rounded-md bg-gradient-to-r from-purple-600 to-purple-800 text-white font-semibold hover:from-purple-700 hover:to-black transition-colors duration-200;
+  @apply px-4 py-2 rounded-md bg-gradient-to-r from-amber-600 to-red-800 text-white font-semibold hover:from-amber-700 hover:to-black transition-colors duration-200;
 }
 
 .btn-primary {
-  @apply px-6 py-3 rounded-lg bg-gradient-to-r from-purple-700 to-black text-white font-semibold hover:shadow-lg transition-all duration-200;
+  @apply px-6 py-3 rounded-lg bg-gradient-to-r from-amber-700 to-black text-white font-semibold hover:shadow-lg transition-all duration-200;
 }
 
 /* Global styles */
@@ -17,7 +17,7 @@
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: thin;
-  scrollbar-color: #8b5cf6 #1a1a1a;
+  scrollbar-color: #b91c1c #1a1a1a;
 }
 
 /* Custom Scrollbar */
@@ -97,10 +97,15 @@ html {
   outline-offset: 2px;
 }
 
-/* Selection style */
+/* Text Selection */
 ::selection {
-  background-color: #7c3aed;
-  color: #ffffff;
+  background: rgba(185, 28, 28, 0.5); /* Red-700 with 50% opacity */
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(185, 28, 28, 0.5); /* Red-700 with 50% opacity */
+  color: white;
 }
 
 /* Animation utilities */

@@ -112,15 +112,16 @@ const Home = () => {
   // Updated Services for Have Dominion
   const services = [
     {
-      icon: <Car className="h-8 w-8" />,
-      title: "Auto Customization & Audio",
-      description: "Premium car audio systems, truck customization, and professional vehicle upgrades for enthusiasts.",
-      features: ["Premium Audio Installation", "Truck Customization", "Performance Upgrades", "Professional Tuning"],
+      icon: <CreditCard className="h-8 w-8" />,
+      title: "Credit Tradelines",
+      description: "Boost your credit profile with our authorized user tradelines and credit building strategies.",
+      features: ["Authorized User Tradelines", "Credit Score Improvement", "Credit Profile Analysis", "Financial Strategy"],
       color: "from-red-600 to-red-800",
       bgColor: "bg-gradient-to-br from-red-600/20 to-red-800/20",
       category: "automotive",
       cta: "Customize Your Vehicle"
     },
+    
     {
       icon: <Truck className="h-8 w-8" />,
       title: "Class A CDL Training",
@@ -131,6 +132,7 @@ const Home = () => {
       category: "cdl",
       cta: "Start CDL Training"
     },
+    
     {
       icon: <Radio className="h-8 w-8" />,
       title: "HAM Radio & Communications",
@@ -171,6 +173,7 @@ const Home = () => {
       category: "financial",
       cta: "Secure Your Future"
     },
+    /* Commented out Software & App Development
     {
       icon: <Smartphone className="h-8 w-8" />,
       title: "Software & App Development",
@@ -181,6 +184,8 @@ const Home = () => {
       category: "software",
       cta: "Start Your Project"
     },
+    */
+    /* Commented out Creditor Academy
     {
       icon: <Building className="h-8 w-8" />,
       title: "Creditor Academy",
@@ -191,7 +196,8 @@ const Home = () => {
       category: "academy",
       cta: "Enroll Now"
     }
-  ]
+    */
+  ];
 
   // const stats = [
   //   { number: "2K+", label: "Private Sector Graduates", icon: <GraduationCap className="h-6 w-6" /> },
@@ -390,38 +396,49 @@ const Home = () => {
             Our Core Services
           </h2>
           
-          {/* Auto Customization & Audio Section */}
-          <div id="auto-customization" className="mb-20 bg-gradient-to-br from-red-900/20 to-black rounded-2xl overflow-hidden border border-red-900/30 shadow-2xl hover:shadow-red-900/20 transition-all duration-300">
+          {/* Credit Tradelines Section */}
+          <div id="credit-tradelines" className="mb-20 bg-gradient-to-br from-red-900/20 to-black rounded-2xl overflow-hidden border border-red-900/30 shadow-2xl hover:shadow-red-900/20 transition-all duration-300">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="p-8 md:p-12">
                 <div className="flex items-center mb-6">
-                  <Car className="h-10 w-10 text-red-500 mr-3" />
-                  <h3 className="text-3xl font-bold text-white">Auto Customization & Audio</h3>
+                  <CreditCard className="h-10 w-10 text-red-500 mr-3" />
+                  <h3 className="text-3xl font-bold text-white">Credit Tradelines</h3>
                 </div>
-                <p className="text-gray-300 mb-6 text-lg">Transform your vehicle with our premium customization and audio solutions. From high-end sound systems to performance upgrades, we bring your automotive dreams to life.</p>
+                <p className="text-gray-300 mb-6 text-lg">Enhance your credit profile with our authorized user tradelines and expert credit building strategies. Achieve your financial goals faster with our proven credit enhancement solutions.</p>
                 <ul className="space-y-3 mb-8">
-                  {['Premium Audio Installation', 'Truck Customization', 'Performance Upgrades', 'Professional Tuning'].map((feature, index) => (
-                    <li key={index} className="flex items-center text-gray-300">
-                      <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
-                      {feature}
-                    </li>
-                  ))}
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                    Authorized User Tradelines
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                    Credit Score Improvement
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                    Credit Profile Analysis
+                  </li>
+                  <li className="flex items-center text-gray-300">
+                    <CheckCircle className="h-5 w-5 text-red-500 mr-2" />
+                    Financial Strategy
+                  </li>
                 </ul>
                 <button className="bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold py-3 px-6 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-300 flex items-center group">
-                  Customize Your Vehicle
+                  Build Your Credit
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
               <div className="relative h-64 md:h-80 lg:h-96 overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Professional auto customization and audio installation" 
+                  src="https://images.unsplash.com/photo-1604594849809-dfedbc827105?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80" 
+                  alt="Credit score and financial growth" 
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent md:from-transparent md:to-black/40"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white text-center md:text-right">
                   <div className="inline-flex items-center px-4 py-2 bg-red-600/90 rounded-full text-sm font-semibold mb-2">
-                    <Car className="h-4 w-4 mr-2" />
+                    <CreditCard className="h-4 w-4 mr-2" />
+                    <span>Credit Building</span>
                     <span>Custom Builds</span>
                   </div>
                   <h4 className="text-xl font-bold">Premium Audio</h4>
@@ -589,39 +606,84 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <div key={index} className={`rounded-2xl p-6 border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 h-full flex flex-col ${
-                service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
-                  ? 'border-red-600/30 bg-gradient-to-br from-red-950/30 to-black/80 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/20' 
-                  : 'border-amber-600/30 bg-gradient-to-br from-amber-950/20 to-black/80 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/20'
-              }`}>
-                <div className={`inline-flex p-3 rounded-xl mb-4 ${
+          {/* First Row of Services */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            {services
+              .filter(service => [
+                "Credit Tradelines", 
+                "Class A CDL Training", 
+                "HAM Radio & Communications"
+              ].includes(service.title))
+              .map((service, index) => (
+                <div key={index} className={`rounded-2xl p-6 border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 h-full flex flex-col ${
                   service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
-                    ? 'bg-red-600/20 text-red-400' 
-                    : 'bg-amber-600/20 text-amber-400'
+                    ? 'border-red-600/30 bg-gradient-to-br from-red-950/30 to-black/80 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/20' 
+                    : 'border-amber-600/30 bg-gradient-to-br from-amber-950/20 to-black/80 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/20'
                 }`}>
-                  {service.icon}
+                  <div className={`inline-flex p-3 rounded-xl mb-4 ${
+                    service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
+                      ? 'bg-red-600/20 text-red-400' 
+                      : 'bg-amber-600/20 text-amber-400'
+                  }`}>
+                    {service.icon}
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-red-100 text-sm mb-4 leading-relaxed flex-grow">{service.description}</p>
+                  <div className="space-y-2 mb-6">
+                    {service.features.slice(0, 3).map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center space-x-2 text-sm text-red-200">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0 text-red-400" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <button className={`w-full font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 ${
+                    service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
+                      ? 'crimson-gradient text-white' 
+                      : 'gold-gradient text-white'
+                  }`}>
+                    {service.cta}
+                  </button>
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-3">{service.title}</h3>
-                <p className="text-red-100 text-sm mb-4 leading-relaxed flex-grow">{service.description}</p>
-                <div className="space-y-2 mb-6">
-                  {service.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-center space-x-2 text-sm text-red-200">
-                      <CheckCircle className="h-4 w-4 flex-shrink-0 text-red-400" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-                <button className={`w-full font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 ${
-                  service.category === 'automotive' || service.category === 'cdl' || service.category === 'radio' 
-                    ? 'crimson-gradient text-white' 
-                    : 'gold-gradient text-white'
+              ))}
+          </div>
+
+          {/* Second Row of Services */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {services
+              .filter(service => [
+                "Home Schooling Programs", 
+                "Home Healthcare Licensing", 
+                "Financial Services & GRC"
+              ].includes(service.title))
+              .map((service, index) => (
+                <div key={index} className={`rounded-2xl p-6 border backdrop-blur-sm transition-all duration-500 hover:-translate-y-2 h-full flex flex-col ${
+                  service.category === 'education' || service.category === 'healthcare' || service.category === 'financial' 
+                    ? 'border-amber-600/30 bg-gradient-to-br from-amber-950/20 to-black/80 hover:border-amber-500/50 hover:shadow-2xl hover:shadow-amber-500/20' 
+                    : 'border-red-600/30 bg-gradient-to-br from-red-950/30 to-black/80 hover:border-red-500/50 hover:shadow-2xl hover:shadow-red-500/20'
                 }`}>
-                  {service.cta}
-                </button>
-              </div>
-            ))}
+                  <div className={`inline-flex p-3 rounded-xl mb-4 ${
+                    service.category === 'education' || service.category === 'healthcare' || service.category === 'financial'
+                      ? 'bg-amber-600/20 text-amber-400' 
+                      : 'bg-red-600/20 text-red-400'
+                  }`}>
+                    {service.icon}
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-3">{service.title}</h3>
+                  <p className="text-red-100 text-sm mb-4 leading-relaxed flex-grow">{service.description}</p>
+                  <div className="space-y-2 mb-6">
+                    {service.features.slice(0, 3).map((feature, featureIndex) => (
+                      <div key={featureIndex} className="flex items-center space-x-2 text-sm text-red-200">
+                        <CheckCircle className="h-4 w-4 flex-shrink-0 text-amber-400" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <button className="w-full font-semibold py-3 rounded-xl transition-all duration-300 hover:scale-105 gold-gradient text-white">
+                    {service.cta}
+                  </button>
+                </div>
+              ))}
           </div>
         </div>
       </section>
@@ -730,7 +792,7 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { icon: "💼", title: "Career Change", services: ["CDL Training", "Creditor Academy"] },
-              { icon: "🚗", title: "Vehicle Services", services: ["Auto Customization", "Audio Systems"] },
+              { icon: "💳", title: "Financial Services", services: ["Credit Tradelines", "Score Building"] },
               { icon: "📱", title: "Tech & Privacy", services: ["Software Development", "HAM Radio"] }
             ].map((category, index) => (
               <div key={index} className="bg-black/50 backdrop-blur-sm rounded-2xl p-6 border border-red-600/30 text-center transition-all duration-500 hover:scale-105 group cursor-pointer">

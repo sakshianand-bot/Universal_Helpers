@@ -8,7 +8,7 @@ import Lessons from '../pages/Lessons/Lessons';
 import About from '../pages/About/About';
 import Contact from '../pages/Contact/Contact';
 import NotFound from '../pages/NotFound';
-import Services from '../pages/Services/Services';
+import Services from '../pages/Servicespage/Services';
 import Login from '../pages/Auth/Login';
 import SignUp from '../pages/Auth/SignUp';
 import ResetPassword from '../pages/Auth/ResetPassword';

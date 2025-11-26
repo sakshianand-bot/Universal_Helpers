@@ -9,141 +9,202 @@ export default function ServiceNeighborhood() {
   const [aiResponse, setAiResponse] = useState('');
 
   const neighborhoodBlocks = [
-    // Automotive & Technical Services (Black/Gold)
+    // HAM Radio Licensing Support
     {
-      id: 'automotive',
-      title: 'Automotive & Technical',
-      color: '#FF8C00', // Dark Orange
-      icon: '🚗',
-      description: 'Professional auto customization, CDL training, and HAM radio services',
+      id: 'ham-radio',
+      title: 'HAM Radio Licensing',
+      color: '#FF8C00',
+      icon: '📡',
+      description: 'Get licensed and master amateur radio communication',
       buildings: [
         { 
-          name: 'Auto Customization', 
+          name: 'Technician License', 
           available: true, 
-          time: '9AM-7PM',
-          description: 'Professional vehicle customization and upgrades',
-          provider: 'TurboTech',
-          rating: '4.9/5'
+          time: 'Self-Paced',
+          description: 'Entry-level HAM radio licensing course - 35 question exam preparation',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          level: 'Beginner',
+          features: ['FCC Exam Prep', 'Basic Operations', 'Study Resources', 'Official Certification']
         },
         { 
-          name: 'CDL Training', 
+          name: 'General License', 
           available: true, 
-          time: '8AM-6PM',
-          description: 'Commercial Driver\'s License training program',
-          provider: 'RoadMasters',
-          rating: '4.8/5'
+          time: 'Self-Paced',
+          description: 'Intermediate HAM radio licensing with extended privileges',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          level: 'Intermediate',
+          features: ['HF Band Access', 'Advanced Theory', 'Practical Skills', 'Emergency Comms']
         },
         { 
-          name: 'Audio Systems', 
+          name: 'Amateur Extra', 
           available: true, 
-          time: '10AM-8PM',
-          description: 'Premium car audio installation and setup',
-          provider: 'SoundCraft',
-          rating: '4.7/5'
+          time: 'Self-Paced',
+          description: 'Advanced HAM radio certification with all frequency privileges',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          level: 'Advanced',
+          features: ['Expert Level', 'Mentorship', 'All Privileges', 'Leadership Training']
         },
         { 
-          name: 'Performance Tuning', 
+          name: 'Practical Training', 
           available: true, 
-          time: '9AM-6PM',
-          description: 'Vehicle performance enhancement services',
-          provider: 'TurboTech',
-          rating: '4.9/5'
+          time: 'Flexible',
+          description: 'Hands-on radio operation practice for real-world scenarios',
+          provider: 'Have Dominion',
+          rating: '4.8/5',
+          features: ['Equipment Setup', 'Emergency Protocols', 'Field Operations', 'Network Building']
         }
       ]
     },
-    // Financial & GRC Services (Apricot Tones)
+
+    // Private Membership & Coaching Center
     {
-      id: 'financial',
-      title: 'Financial & GRC',
-      color: '#FFA500', // Orange
-      icon: '�',
-      description: 'Financial planning, GRC, and authorized user account management',
+      id: 'private-membership',
+      title: 'Private Membership',
+      color: '#FFA500',
+      icon: '🎯',
+      description: 'Exclusive coaching and private sector transition support',
       buildings: [
         { 
-          name: 'Investment Planning', 
+          name: 'Creditor Academy', 
           available: true, 
-          time: '9AM-5PM',
-          description: 'Personalized investment strategies',
-          provider: 'WealthGuard',
-          rating: '4.8/5'
+          time: '24/7 Access',
+          description: 'Structured financial education community with masterclasses',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          features: ['Masterclass Access', 'Private Group Sessions', 'Step-by-step Pathways', 'Network Building']
+        },
+        { 
+          name: 'Business Structure', 
+          available: true, 
+          time: 'By Appointment',
+          description: 'Private business entity setup and compliance guidance',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          features: ['Entity Formation', 'Contract Setup', 'Legal Compliance', 'Private Sector Transition']
         },
         { 
           name: 'Credit Building', 
           available: true, 
-          time: '24/7',
-          description: 'Credit score improvement programs',
-          provider: 'CreditPlus',
-          rating: '4.6/5'
+          time: 'Self-Paced',
+          description: 'Advanced credit enhancement and optimization strategies',
+          provider: 'Have Dominion',
+          rating: '4.8/5',
+          features: ['Credit Repair', 'Score Optimization', 'Leverage Strategies', 'Monitoring']
         },
         { 
-          name: 'Tax Services', 
+          name: 'Private Contracting', 
           available: true, 
-          time: '8AM-8PM',
-          description: 'Professional tax preparation and filing',
-          provider: 'TaxPro',
-          rating: '4.9/5'
-        },
-        { 
-          name: 'Retirement Planning', 
-          available: true, 
-          time: '9AM-5PM',
-          description: 'Comprehensive retirement solutions',
-          provider: 'GoldenYears',
-          rating: '4.7/5'
+          time: 'Consultation',
+          description: 'Complete transition to private sector contracting',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          features: ['Contract Templates', 'Negotiation Training', 'Private Agreements', 'Client Acquisition']
         }
       ]
     },
-    // Education & Home Schooling (Rich Muted Tones)
+
+    // Financial Homeschooling / Private Coaching
     {
-      id: 'education',
-      title: 'Education & Home School',
-      color: '#FF8C00', // Dark Orange
-      icon: '📚',
-      description: 'Customized home schooling programs and educational resources',
+      id: 'financial-coaching',
+      title: 'Financial Coaching',
+      color: '#FF8C00',
+      icon: '💰',
+      description: 'One-on-one financial education and private banking mastery',
       buildings: [
         { 
-          name: 'K-5 Curriculum', 
+          name: 'Credit Mastery', 
           available: true, 
-          time: '7AM-3PM',
-          description: 'Elementary level home education packages',
-          provider: 'EduHome',
-          rating: '4.9/5',
-          ageGroup: '5-10 years'
-        },
-        { 
-          name: 'Middle School', 
-          available: true, 
-          time: '8AM-4PM',
-          description: 'Comprehensive middle school curriculum',
-          provider: 'LearnBright',
-          rating: '4.8/5',
-          ageGroup: '11-13 years'
-        },
-        { 
-          name: 'High School', 
-          available: true, 
-          time: 'Flexible',
-          description: 'College prep and advanced placement courses',
-          provider: 'Academy Prep',
-          rating: '4.9/5',
-          ageGroup: '14-18 years'
-        },
-        { 
-          name: 'Special Education', 
-          available: true, 
-          time: 'By Appointment',
-          description: 'Personalized learning plans for special needs',
-          provider: 'InclusiveEd',
+          time: '1-on-1 Sessions',
+          description: 'Complete credit building and management system',
+          provider: 'Have Dominion',
           rating: '5.0/5',
-          ageGroup: 'All Ages'
+          features: ['Credit Analysis', 'Building Strategies', 'Maintenance Plans', 'Dispute Resolution']
+        },
+        { 
+          name: 'Private Banking', 
+          available: true, 
+          time: 'Consultation',
+          description: 'Access and utilize private banking systems effectively',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          features: ['Banking Fundamentals', 'Private Lending', 'Asset Protection', 'Wealth Preservation']
+        },
+        { 
+          name: 'Smart Borrowing', 
+          available: true, 
+          time: 'Strategy Sessions',
+          description: 'Intelligent borrowing and strategic repayment systems',
+          provider: 'Have Dominion',
+          rating: '4.8/5',
+          features: ['Loan Optimization', 'Debt Management', 'Leverage Strategies', 'Risk Assessment']
+        },
+        { 
+          name: 'Financial Independence', 
+          available: true, 
+          time: 'Guided Program',
+          description: 'Achieve complete financial independence and control',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          features: ['Wealth Building', 'Passive Income', 'Asset Allocation', 'Legacy Planning']
         }
       ]
     },
+
+    // Authorized User Tradelines
+    {
+      id: 'tradelines',
+      title: 'Credit Tradelines',
+      color: '#D2691E',
+      icon: '📈',
+      description: 'Boost your credit profile with established credit lines',
+      buildings: [
+        { 
+          name: 'AU Tradeline Setup', 
+          available: true, 
+          time: '24-48 Hours',
+          description: 'Get added to well-established credit accounts instantly',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          features: ['Quick Processing', 'Quality Accounts', 'Immediate Impact', 'Secure Process']
+        },
+        { 
+          name: 'Credit Profile Review', 
+          available: true, 
+          time: 'Consultation',
+          description: 'Comprehensive credit analysis and custom strategy development',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          features: ['Full Analysis', 'Custom Strategy', 'Action Plan', 'Progress Tracking']
+        },
+        { 
+          name: 'Score Optimization', 
+          available: true, 
+          time: 'Ongoing Support',
+          description: 'Continuous credit improvement monitoring and adjustment',
+          provider: 'Have Dominion',
+          rating: '4.8/5',
+          features: ['Monthly Monitoring', 'Strategy Adjustments', 'Progress Reports', 'Expert Guidance']
+        },
+        { 
+          name: 'Business Credit Building', 
+          available: true, 
+          time: 'Setup + Coaching',
+          description: 'Establish and build strong business credit profiles',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          features: ['Business Setup', 'Credit Establishment', 'Lending Access', 'Growth Funding']
+        }
+      ]
+    },
+
     // Document & Compliance Management
     {
       id: 'documents',
       title: 'Document Management',
-      color: '#D2691E', // Chocolate
+      color: '#D2691E',
       icon: '📋',
       description: 'Secure document storage and compliance tracking system',
       buildings: [
@@ -151,191 +212,78 @@ export default function ServiceNeighborhood() {
           name: 'Document Vault', 
           available: true, 
           time: '24/7',
-          description: 'Secure cloud storage for all important documents',
-          provider: 'DocuSafe',
+          description: 'Secure encrypted cloud storage for all important documents',
+          provider: 'Have Dominion',
           rating: '4.9/5',
-          features: ['Encrypted Storage', 'Mobile Access', 'Unlimited Uploads']
+          features: ['Military-grade Encryption', 'Mobile Access', 'Unlimited Uploads', 'Automated Backup']
         },
         { 
           name: 'Compliance Tracker', 
           available: true, 
           time: '24/7',
-          description: 'Never miss a deadline with automated compliance tracking',
-          provider: 'ComplyRight',
+          description: 'Automated compliance tracking and deadline management',
+          provider: 'Have Dominion',
           rating: '5.0/5',
-          features: ['Deadline Alerts', 'Document Expiry', 'Audit Trails']
-        },
-        { 
-          name: 'Mobile App', 
-          available: true, 
-          time: '24/7',
-          description: 'Access your documents on the go',
-          provider: 'Available on F-Droid & Aurora',
-          rating: '4.8/5',
-          features: ['Offline Access', 'Biometric Login', 'Quick Scan']
+          features: ['Deadline Alerts', 'Document Expiry', 'Audit Trails', 'Regulatory Updates']
         }
       ]
     },
-    // Healthcare & Licensing
-    {
-      id: 'healthcare',
-      title: 'Healthcare & Licensing',
-      color: '#8B0000', // Dark Red (kept the same)
-      icon: '🏥',
-      description: 'Healthcare licensing and home healthcare support services',
-      buildings: [
-        { 
-          name: 'Emergency Care', 
-          available: true, 
-          time: '24/7',
-          description: 'Immediate medical attention for urgent situations',
-          provider: 'MediQuick Emergency',
-          rating: '4.9/5'
-        },
-        { 
-          name: 'Online Consultation', 
-          available: true, 
-          time: '6AM-11PM',
-          description: 'Virtual doctor consultations from home',
-          provider: 'HealthConnect',
-          rating: '4.7/5'
-        },
-        { 
-          name: 'Medicine Delivery', 
-          available: true, 
-          time: '8AM-10PM',
-          description: 'Prescription and medicine delivery service',
-          provider: 'PharmaExpress',
-          rating: '4.8/5'
-        },
-        { 
-          name: 'Wellness Programs', 
-          available: true, 
-          time: '7AM-9PM',
-          description: 'Comprehensive health and wellness programs',
-          provider: 'Wellness Center',
-          rating: '4.6/5'
-        }
-      ]
-    },
-    // Software & App Development
+
+    /* Commented out Software Development section
     {
       id: 'development',
       title: 'Software Development',
-      color: '#FF8C00', // Dark Orange
-      icon: '�‍��',
-      description: 'Custom software and mobile app development services',
+      color: '#FF8C00',
+      icon: '💻',
+      description: 'Custom software and secure app development services',
       buildings: [
         { 
           name: 'Web Development', 
           available: true, 
           time: '24/7',
           description: 'Custom website and web application development',
-          provider: 'WebCraft',
-          rating: '4.9/5'
-        },
-        { 
-          name: 'Cybersecurity', 
-          available: true, 
-          time: '24/7',
-          description: 'Comprehensive digital protection services',
-          provider: 'SecureNet',
-          rating: '5.0/5'
-        },
-        { 
-          name: 'Cloud Services', 
-          available: true, 
-          time: '24/7',
-          description: 'Secure cloud storage and computing solutions',
-          provider: 'CloudForge',
-          rating: '4.8/5'
-        },
-        { 
-          name: 'IT Support', 
-          available: true, 
-          time: '8AM-10PM',
-          description: 'Professional technical support and troubleshooting',
-          provider: 'TechAssist',
-          rating: '4.7/5'
-        }
-      ]
-    },
-    // Creditor Academy
-    {
-      id: 'creditor-academy',
-      title: 'Creditor Academy',
-      color: '#FF8C00', // Dark Orange
-      icon: '🎓',
-      description: 'Master financial independence and credit building',
-      buildings: [
-        { 
-          name: 'Basic Training', 
-          available: true, 
-          time: 'Self-Paced',
-          description: 'Foundations of credit and financial management',
-          provider: 'Creditor Academy',
-          rating: '5.0/5',
-          level: 'Beginner'
-        },
-        { 
-          name: 'Advanced Strategies', 
-          available: true, 
-          time: 'Self-Paced',
-          description: 'Advanced credit building techniques',
-          provider: 'Creditor Academy',
+          provider: 'Have Dominion',
           rating: '4.9/5',
-          level: 'Intermediate'
+          features: ['Responsive Design', 'Secure Coding', 'Performance Optimization', 'Maintenance']
         },
         { 
-          name: 'Master Class', 
+          name: 'Mobile Apps', 
           available: true, 
-          time: 'By Application',
-          description: 'Elite financial strategies and mentorship',
-          provider: 'Creditor Academy',
+          time: '24/7',
+          description: 'Secure mobile application development for F-Droid & Aurora',
+          provider: 'Have Dominion',
           rating: '5.0/5',
-          level: 'Advanced'
+          features: ['Cross-platform', 'Privacy Focused', 'Offline Capability', 'Secure Authentication']
         }
       ]
     },
-    // Security & Protection
+    */
+
+    // Security & Protection Services
     {
       id: 'security',
       title: 'Security Services',
-      color: '#8B0000', // Dark Red (kept the same)
-      icon: '�',
-      description: 'Comprehensive security solutions for all your needs',
+      color: '#8B0000',
+      icon: '🛡️',
+      description: 'Comprehensive digital and physical security solutions',
       buildings: [
-        { 
-          name: 'Home Security', 
-          available: true, 
-          time: '24/7',
-          description: 'Complete home security systems',
-          provider: 'SafeHaven',
-          rating: '4.9/5'
-        },
         { 
           name: 'Cybersecurity', 
           available: true, 
           time: '24/7',
-          description: 'Digital protection and threat prevention',
-          provider: 'CyberShield',
-          rating: '5.0/5'
+          description: 'Complete digital protection and threat prevention',
+          provider: 'Have Dominion',
+          rating: '5.0/5',
+          features: ['Threat Monitoring', 'Vulnerability Assessment', 'Incident Response', 'Security Training']
         },
         { 
-          name: 'Event Security', 
+          name: 'Privacy Consulting', 
           available: true, 
-          time: '24/7',
-          description: 'Professional security for events and gatherings',
-          provider: 'EventGuard',
-          rating: '4.8/5'
-        },
-        { 
-          name: 'VIP Protection', 
-          available: true, 
-          time: '24/7',
-          description: 'Executive and VIP security services',
-          provider: 'EliteGuard',
-          rating: '5.0/5'
+          time: 'Consultation',
+          description: 'Personal and business privacy protection strategies',
+          provider: 'Have Dominion',
+          rating: '4.9/5',
+          features: ['Data Protection', 'Online Privacy', 'Secure Communications', 'Asset Concealment']
         }
       ]
     }
@@ -359,15 +307,23 @@ export default function ServiceNeighborhood() {
 
   const askAIQuestion = () => {
     if (userQuestion.trim()) {
-      // Simulate AI response
-      const responses = [
-        "Based on your question, I recommend checking our Home Tutoring services for personalized learning support.",
-        "For that type of service, our Emergency Care or Online Consultation would be most suitable.",
-        "I suggest looking at our Skill Workshops for hands-on learning experiences.",
-        "Our Cleaning Services team can help with that! They're available 7AM-9PM daily."
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setAiResponse(randomResponse);
+      // Simulate AI response based on question content
+      let response = "";
+      const question = userQuestion.toLowerCase();
+      
+      if (question.includes('ham') || question.includes('radio')) {
+        response = "For HAM radio licensing, I recommend starting with our Technician License program. It's perfect for beginners and includes full FCC exam preparation with curated learning resources.";
+      } else if (question.includes('credit') || question.includes('score')) {
+        response = "Our Credit Tradelines service can help boost your credit score quickly. Combined with our Financial Coaching, you'll have a complete credit building strategy.";
+      } else if (question.includes('business') || question.includes('private')) {
+        response = "The Private Membership program includes business structure setup, private contracting guidance, and access to our exclusive Creditor Academy community.";
+      } else if (question.includes('financial') || question.includes('money')) {
+        response = "Our Financial Coaching provides one-on-one mentorship covering credit building, private banking, and strategies for achieving financial independence.";
+      } else {
+        response = "Based on your question, I recommend exploring our comprehensive services. Each program is designed to work together for complete personal and financial development.";
+      }
+      
+      setAiResponse(response);
       setUserQuestion('');
     }
   };
@@ -406,34 +362,36 @@ export default function ServiceNeighborhood() {
         <p className="text-gray-300 text-sm">{selectedCategory.description}</p>
       </div>
 
-      {/* AI Question Section */}
+      {/* AI Question Section - Commented out as per request */}
+      {/* 
       <div className="p-6 border-b border-gray-700">
-        <h3 className="text-lg font-semibold text-white mb-3">🤖 Need Help Choosing?</h3>
+        <h3 className="text-lg font-semibold text-white mb-3">🤖 Have Dominion Assistant</h3>
         <div className="space-y-3">
           <textarea
             value={userQuestion}
             onChange={(e) => setUserQuestion(e.target.value)}
-            placeholder="Ask me anything about these services... (e.g., Which service is best for quick learning?)"
-            className="w-full h-20 p-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none text-sm"
+            placeholder="Ask about our services... (e.g., Which HAM radio license should I start with?)"
+            className="w-full h-20 p-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 resize-none text-sm"
           />
           <button
             onClick={askAIQuestion}
             disabled={!userQuestion.trim()}
-            className="w-full py-2 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors"
+            className="w-full py-2 bg-orange-600 hover:bg-orange-700 disabled:bg-gray-600 text-white rounded-lg font-medium transition-colors"
           >
-            Ask AI Assistant
+            Ask Have Dominion AI
           </button>
           {aiResponse && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg"
+              className="p-3 bg-orange-500/10 border border-orange-500/20 rounded-lg"
             >
-              <p className="text-blue-300 text-sm">{aiResponse}</p>
+              <p className="text-orange-300 text-sm">{aiResponse}</p>
             </motion.div>
           )}
         </div>
       </div>
+      */}
 
       {/* Services List */}
       <div className="p-6">
@@ -445,11 +403,11 @@ export default function ServiceNeighborhood() {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-gray-600 transition-colors cursor-pointer group"
-              onClick={() => alert(`Booking ${building.name}`)}
+              className="p-4 bg-gray-800/50 rounded-lg border border-gray-700 hover:border-orange-500/50 transition-colors cursor-pointer group"
+              onClick={() => alert(`Booking ${building.name} - Contact Have Dominion to get started!`)}
             >
               <div className="flex items-start justify-between mb-2">
-                <h4 className="text-white font-semibold group-hover:text-purple-300 transition-colors">
+                <h4 className="text-white font-semibold group-hover:text-orange-300 transition-colors">
                   {building.name}
                 </h4>
                 <span className="text-green-400 text-sm font-medium bg-green-500/10 px-2 py-1 rounded">
@@ -457,6 +415,13 @@ export default function ServiceNeighborhood() {
                 </span>
               </div>
               <p className="text-gray-400 text-sm mb-2">{building.description}</p>
+              <div className="flex flex-wrap gap-1 mb-2">
+                {building.features.slice(0, 3).map((feature, idx) => (
+                  <span key={idx} className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+                    {feature}
+                  </span>
+                ))}
+              </div>
               <div className="flex items-center justify-between text-xs text-gray-500">
                 <span>🕒 {building.time}</span>
                 <span>👤 {building.provider}</span>
@@ -469,11 +434,14 @@ export default function ServiceNeighborhood() {
       {/* Quick Actions */}
       <div className="p-6 border-t border-gray-700">
         <div className="space-y-2">
-          <button className="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-semibold transition-colors">
-            📞 Contact All Providers
+          <button 
+            onClick={() => alert('Contact Have Dominion: info@havedominion.com')}
+            className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white rounded-lg font-semibold transition-colors"
+          >
+            📞 Contact Have Dominion
           </button>
           <button className="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-lg font-medium transition-colors border border-gray-600">
-            💰 Compare Prices
+            💰 Get Pricing Info
           </button>
         </div>
       </div>
@@ -484,7 +452,7 @@ export default function ServiceNeighborhood() {
     <div className="min-h-screen bg-black pt-20 pb-20">
       {/* Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-amber-600/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-orange-600/10 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-red-800/10 rounded-full blur-3xl"></div>
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,140,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(139,0,0,0.03)_1px,transparent_1px)] bg-[size:64px_64px]"></div>
       </div>
@@ -519,7 +487,7 @@ export default function ServiceNeighborhood() {
             transition={{ delay: 0.2 }}
             className="text-6xl font-bold text-white mb-6"
           >
-            Service Neighborhood
+            Have Dominion Services
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -527,7 +495,7 @@ export default function ServiceNeighborhood() {
             transition={{ delay: 0.3 }}
             className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto"
           >
-            Explore different districts to find exactly what you need in our vibrant service community
+            Master your communication, finances, and future with our comprehensive service ecosystem
           </motion.p>
           
           {/* Search Bar */}
@@ -540,10 +508,10 @@ export default function ServiceNeighborhood() {
             <div className="relative">
               <input
                 type="text"
-                placeholder="🔍 What service are you looking for? (e.g., repair, tutor, doctor...)"
+                placeholder="🔍 Search Have Dominion services... (HAM radio, credit, financial, etc.)"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-6 py-4 bg-black/30 border border-gray-700 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-purple-500 backdrop-blur-sm text-lg transition-all duration-300 hover:border-gray-600"
+                className="w-full px-6 py-4 bg-black/30 border border-gray-700 rounded-2xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 backdrop-blur-sm text-lg transition-all duration-300 hover:border-gray-600"
               />
               {searchQuery && (
                 <button
@@ -574,7 +542,7 @@ export default function ServiceNeighborhood() {
                   transition: { duration: 0.3 }
                 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-2xl p-6 cursor-pointer shadow-xl hover:border-gray-500 transition-all duration-300"
+                className="bg-gray-900/80 backdrop-blur-md border border-gray-700 rounded-2xl p-6 cursor-pointer shadow-xl hover:border-orange-500/50 transition-all duration-300"
                 onClick={() => handleCategoryClick(block)}
               >
                 {/* Block Header */}
@@ -592,7 +560,7 @@ export default function ServiceNeighborhood() {
                   <div className="flex-1">
                     <h3 className="text-xl font-bold text-white">{block.title}</h3>
                     <p className="text-gray-400 text-sm">
-                      {block.buildings.length} services available
+                      {block.buildings.length} specialized services
                     </p>
                   </div>
                 </div>
@@ -627,7 +595,7 @@ export default function ServiceNeighborhood() {
                     className="text-center"
                     whileHover={{ scale: 1.05 }}
                   >
-                    <span className="text-red-400 text-sm font-medium bg-red-500/10 px-3 py-1 rounded-full border border-red-500/20">
+                    <span className="text-orange-400 text-sm font-medium bg-orange-500/10 px-3 py-1 rounded-full border border-orange-500/20">
                       +{block.buildings.length - 2} more services →
                     </span>
                   </motion.div>
@@ -647,7 +615,7 @@ export default function ServiceNeighborhood() {
             <div className="text-8xl mb-6 text-gray-600">🔍</div>
             <h3 className="text-2xl font-bold text-white mb-3">No services found</h3>
             <p className="text-gray-400 text-lg">
-              Try searching for "healthcare", "education", "home services", etc.
+              Try searching for "HAM radio", "credit", "financial", "membership", etc.
             </p>
             <button
               onClick={() => setSearchQuery('')}
@@ -669,25 +637,23 @@ export default function ServiceNeighborhood() {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white rounded-xl transition-all font-medium flex items-center space-x-2 shadow-lg hover:shadow-red-500/20"
+              className="px-6 py-3 bg-gradient-to-r from-orange-600 to-orange-800 hover:from-orange-700 hover:to-orange-900 text-white rounded-xl transition-all font-medium flex items-center space-x-2 shadow-lg hover:shadow-orange-500/20"
             >
-              <span>View All Maps</span>
+              <span>Join Have Dominion</span>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all font-medium flex items-center space-x-2 border border-gray-600"
             >
-              
-              <span>Need Help?</span>
+              <span>Schedule Consultation</span>
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-xl transition-all font-medium flex items-center space-x-2 border border-gray-600"
             >
-              
-              <span>Favorites</span>
+              <span>Download Resources</span>
             </motion.button>
           </div>
         </motion.div>
